@@ -10,9 +10,9 @@ let sqlDb = knex({
   version: '7.2',
   connection: {
     host : 'https://book-app-v.herokuapp.com/',
-    user : 'postgres',
-    password : 'vegagc',
-    database : 'mylocaldb'
+    user : 'rpucwjwdsauhfr',
+    password : '5d8743de4b1d6827fc9021f3a5954f3ab2cd54cf25b78b7c922d6d03c6665c2c',
+    database : 'dd1s7vajsoabk3'
   }
 });
 
