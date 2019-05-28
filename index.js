@@ -8,9 +8,11 @@ var app = require("connect")();
 var swaggerTools = require("swagger-tools");
 var jsyaml = require("js-yaml");
 var serverPort = process.env.PORT || 8080;
-//let cookieSession = require("cookie-session");
-//let cookieParser = require("cookie-parser");
+let cookieSession = require("cookie-session");
+let cookieParser = require("cookie-parser");
 let serveStatic = require("serve-static");
+
+
 
 let { setupDataLayer } = require("./service/DataLayer");
 
@@ -26,8 +28,8 @@ var spec = fs.readFileSync(path.join(__dirname, "api/swagger.yaml"), "utf8");
 var swaggerDoc = jsyaml.safeLoad(spec);
 
 // Add cookies to responses
-//app.use(cookieParser());
-//app.use(cookieSession({ name: "session", keys: ["abc", "def"] }));
+app.use(cookieParser());
+app.use(cookieSession({ name: "session", keys: ["abc", "def"] }));
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
@@ -45,7 +47,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
 
   app.use(serveStatic(__dirname + "/www"));
 
-  setupDataLayer().then(() => {
+  if(setupDataLayer())  {
     // Start the server
     http.createServer(app).listen(serverPort, function() {
       console.log(
@@ -58,5 +60,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
         serverPort
       );
     });
-  });
+  } else {
+    console.log("ERROR WITH DBs");
+  }
 });

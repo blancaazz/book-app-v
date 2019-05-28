@@ -2,9 +2,29 @@
 
 let sqlDb;
 
+
+function getAuthorId(bookId){
+  
+    return sqlDb("written")
+    .where('id_libro','=',bookId)
+    .then(data => {
+      return data.map(e => {
+        return e.id_author;
+      });
+    });
+ 
+};
+
+
+// function getAuthor(bookId){
+ 
+// }
+
+
 exports.booksDbSetup = function(database) {
   sqlDb = database;
   console.log("Checking if books table exists");
+
   return database.schema.hasTable("books").then(exists => {
     if (!exists) {
       console.log("ERROR-CHECK DATABASE");
@@ -28,10 +48,7 @@ exports.booksGET = function(offset,limit) {
   .limit(limit)
   .offset(offset)
   .then(data => {
-    return data.map(e => {
-      e.price = { valuse: e.value, currency: e.currency };
-      return e;
-    });
+    return data;
   });
 }
 
@@ -44,14 +61,30 @@ exports.booksGET = function(offset,limit) {
  * returns List
  **/
 exports.getBookAuthor = function(bookId) {
-  return sqlDb("books")
-  .where('id','=',bookId)
-  .then(data => {
-    return data.map(e => {
-      e.price = { valuse: e.value, currency: e.currency };
-      return e;
+  
+  var response = "none";
+  let p1;
+
+
+  getAuthorId(bookId).then(data=> {
+
+    var authorId = data;
+    console.log("Search Author = "+ authorId);
+    
+    p1 =  sqlDb("authors")
+    .where('id','=',authorId)
+    .then(res=>function(){
+      response = res;
     });
+
+    return;
+
   });
+
+  return p1.then(res=>{
+    return res;
+  });
+  
 }
 
 
@@ -63,23 +96,13 @@ exports.getBookAuthor = function(bookId) {
  * returns Book
  **/
 exports.getBookById = function(bookId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+  return sqlDb("books")
+  .where('id','=',bookId)
+  .then(data => {
+    return data.map(e => {
+      e.price = { valuse: e.value, currency: e.currency };
+      return e;
+    });
   });
 }
 

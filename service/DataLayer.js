@@ -1,8 +1,9 @@
 const knex = require("knex");
 
 let { booksDbSetup } = require("./BookService");
+let { authorsDbSetup } = require("./AuthorService");
 
-let bookTable;
+let errorTables;
 
 let sqlDb = knex({
   client: 'pg',
@@ -11,7 +12,7 @@ let sqlDb = knex({
     host : '127.0.0.1',
     user : 'postgres',
     password : 'vegagc',
-    database : 'api'
+    database : 'mylocaldb'
   }
 });
 
@@ -29,8 +30,13 @@ let sqlDb = knex({
 function setupDataLayer() {
   console.log("Setting up data layer");
 
-  bookTable = booksDbSetup(sqlDb)
-  return bookTable;
+  errorTables = booksDbSetup(sqlDb);
+  if (!errorTables) return false;
+  errorTables = authorsDbSetup(sqlDb);
+  if (!errorTables) return false;
+
+
+  return true;
 }
 
 module.exports = { database: sqlDb, setupDataLayer };

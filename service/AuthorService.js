@@ -1,5 +1,20 @@
 'use strict';
 
+let sqlDb;
+
+exports.authorsDbSetup = function(database) {
+  sqlDb = database;
+  console.log("Checking if authors table exists");
+  return database.schema.hasTable("authors").then(exists => {
+    if (!exists) {
+      console.log("ERROR-CHECK DATABASE AUTHORS");
+      return;
+    }
+  });
+};
+
+
+
 
 /**
  * Authors available in the inventory
@@ -74,18 +89,17 @@ exports.getAuthorBooks = function(authorId) {
  * returns Author
  **/
 exports.getAuthorById = function(authorId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "name" : "Cervantes"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb("authors")
+    .where('id','=',authorId)
+    .then(result => {
+      
+      return result.map(e => {
+        console.log(e);
+        return e;
+      });
+
+      
+    });
 }
 
 
