@@ -8,7 +8,7 @@ let { groupDbSetup } = require ("./GroupService");
 
 let errorTables;
 
-/*
+
 
 let sqlDb = knex({
   client: 'pg',
@@ -21,18 +21,18 @@ let sqlDb = knex({
   }
 });
 
-*/
 
-let sqlDb = knex({
-  client: 'pg',
-  version: '7.2',
-  connection: {
-    host : 'localhost',
-    user : 'blanca',
-    //password : 'vegagc',
-    database : 'BooksDb'
-  }
-});
+
+// let sqlDb = knex({
+//   client: 'pg',
+//   version: '7.2',
+//   connection: {
+//     host : 'localhost',
+//     user : 'blanca',
+//     //password : 'vegagc',
+//     database : 'BooksDb'
+//   }
+// });
 
 
 function setupDataLayer() {
