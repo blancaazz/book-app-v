@@ -476,6 +476,21 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
+  /user/logout:
+    post:
+      tags:
+      - "user"
+      summary: "Logout"
+      description: "Logout with a form"
+      operationId: "userLogoutPOST"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "succesfull logout"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
   /user/register:
     post:
       tags:

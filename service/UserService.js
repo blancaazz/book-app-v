@@ -1,5 +1,18 @@
 'use strict';
 
+let sqlDb;
+
+exports.userDbSetup = function(database) {
+  sqlDb = database;
+  console.log("Checking if events table exists");
+
+  return database.schema.hasTable("users").then(exists => {
+    if (!exists) {
+      console.log("ERROR-CHECK DATABASE");
+      return;
+    }
+  });
+};
 
 /**
  * Login
@@ -11,9 +24,41 @@
  **/
 exports.userLoginPOST = function(username,password) {
   return new Promise(function(resolve, reject) {
+
+    // sqlDb("users")
+    // .where('user', '=', username)
+    // .then(result => {
+    //   if(result.password == password){
+    //     resolve();
+    //   }else{
+    //     reject("Wrong Password");
+    //   }
+    // }).catch(function(){
+    //   reject("Wrong Name");
+    // });
+
+    if(username == "admin" && password == "abc"){
+      resolve();
+    }else{
+      reject("Wrong Password");
+    }
+
+  });
+}
+
+
+/**
+ * Logout
+ * Logout with a form
+ *
+ * no response value expected for this operation
+ **/
+exports.userLogoutPOST = function() {
+  return new Promise(function(resolve, reject) {
     resolve();
   });
 }
+
 
 
 /**

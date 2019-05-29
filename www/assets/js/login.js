@@ -32,25 +32,16 @@ function createCORSRequest(method, url) {
 $(document).ready(function(){
     
 
-    $("#send").click(function(){
+    $("#bLogin").click(function(){
         
-        var user = $("#user").text;
-        var password = $("#password").text;
-
-        // var obj = `{
-        //   "username" : "Raj",
-        //   "password" : 32
-        //   }`;
-
-        // var newJson = JSON.parse(obj);
-        // newJson.username = user;
-        // newJson.password = password;
+        var user = $("#name").val();
+        var password = $("#password").val();
 
         var request = "username="+user+"&password="+password;
 
         console.log("Button clicked");
 
-        var url = 'v2/user/login';
+        var url = '/v2/user/login';
 
 
         xhttp = createCORSRequest('POST', url);
@@ -61,8 +52,8 @@ $(document).ready(function(){
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhttp.onload = function() {
-          var text = xhttp.getResponseHeader("Set-Cookie");
-          $("#res").text(text);
+          var text = "SEND";
+          $("#res").text(xhttp.status);
 
         };
 
@@ -70,5 +61,25 @@ $(document).ready(function(){
         xhttp.send(request);
 
     });
+
+    $("#bLogout").click(function(){
+      
+      console.log("Button LOGOUT clicked");
+
+      var url = '/v2/user/logout';
+
+      xhttp = createCORSRequest('POST', url);
+      if (!xhttp) {
+          throw new Error('CORS not supported');
+      }
+
+      xhttp.onload = function() {
+        var text = "LOGGED OUT";
+        $("#res").text(text);
+      };
+      
+      xhttp.send();
+
+  });
 
 });
