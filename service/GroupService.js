@@ -1,5 +1,19 @@
 'use strict';
 
+let sqlDb;
+
+exports.groupDbSetup = function(database) {
+  sqlDb = database;
+  console.log("Checking if group table exists");
+
+  return database.schema.hasTable("themes").then(exists => {
+    if (!exists) {
+      console.log("ERROR-CHECK DATABASE");
+      return;
+    }
+  });
+};
+
 
 /**
  * Get list of books
@@ -9,33 +23,11 @@
  * returns List
  **/
 exports.getGenresBooks = function(genreName) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-}, {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb("books")
+  .where('literary_genres', '@>', [genreName])
+  .then (data => {
+    return data;
+  })
 }
 
 
@@ -46,21 +38,10 @@ exports.getGenresBooks = function(genreName) {
  * returns List
  **/
 exports.getGenresList = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "name" : "Group X"
-}, {
-  "id" : 0,
-  "name" : "Group X"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb("literary_genres")
+  .then( data => {
+    return data;
+  })
 }
 
 
@@ -72,33 +53,12 @@ exports.getGenresList = function() {
  * returns List
  **/
 exports.getThemesBooks = function(themeName) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-}, {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  
+  return sqlDb("books")
+  .where('themes', '@>', [themeName])
+  .then (data => {
+    return data;
+  })
 }
 
 
@@ -109,20 +69,9 @@ exports.getThemesBooks = function(themeName) {
  * returns List
  **/
 exports.getThemesList = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "name" : "Group X"
-}, {
-  "id" : 0,
-  "name" : "Group X"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb("themes")
+  .then (data => {
+    return data;
+  })
 }
 

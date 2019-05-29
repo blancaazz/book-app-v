@@ -25,20 +25,11 @@ exports.authorsDbSetup = function(database) {
  * returns List
  **/
 exports.authorsGET = function(offset,limit) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "name" : "Cervantes"
-}, {
-  "id" : 0,
-  "name" : "Cervantes"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+  return sqlDb("authors")
+  .limit(limit)
+  .offset(offset)
+  .then(data => {
+    return data;
   });
 }
 
@@ -51,34 +42,15 @@ exports.authorsGET = function(offset,limit) {
  * returns List
  **/
 exports.getAuthorBooks = function(authorId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-}, {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  var subquery = sqlDb("written").where('id_author', '=', authorId).select('id_libro');
+
+  return sqlDb("books")
+    .where('id', 'in', subquery)
+    .then (result => {
+      return result;
+    })
 }
+
 
 
 /**
@@ -111,16 +83,15 @@ exports.getAuthorById = function(authorId) {
  * returns IdObject
  **/
 exports.getAuthorId = function(authorName) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "value" : 0.8008281904610115
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
+  return sqlDb("authors")
+    .where('name','=',authorName)
+    .then(result => {
+      
+      return result.map(e => {
+        console.log(e);
+        return e;
+      });
 
+      
+    });
+}

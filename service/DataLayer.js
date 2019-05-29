@@ -2,8 +2,13 @@ const knex = require("knex");
 
 let { booksDbSetup } = require("./BookService");
 let { authorsDbSetup } = require("./AuthorService");
+let { eventsDbSetup } = require("./EventService");
+let { groupDbSetup } = require ("./GroupService");
+
 
 let errorTables;
+
+/*
 
 let sqlDb = knex({
   client: 'pg',
@@ -16,6 +21,20 @@ let sqlDb = knex({
   }
 });
 
+*/
+
+let sqlDb = knex({
+  client: 'pg',
+  version: '7.2',
+  connection: {
+    host : 'localhost',
+    user : 'blanca',
+    //password : 'vegagc',
+    database : 'BooksDb'
+  }
+});
+
+
 function setupDataLayer() {
   console.log("Setting up data layer");
 
@@ -23,7 +42,11 @@ function setupDataLayer() {
   if (!errorTables) return false;
   errorTables = authorsDbSetup(sqlDb);
   if (!errorTables) return false;
-
+  errorTables = eventsDbSetup(sqlDb);
+  if (!errorTables) return false;
+  errorTables = groupDbSetup(sqlDb);
+  if(!errorTables) return false;
+  return true;
 
   return true;
 }

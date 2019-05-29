@@ -3,22 +3,6 @@
 let sqlDb;
 
 
-function getAuthorId(bookId){
-  
-    return sqlDb("written")
-    .where('id_libro','=',bookId)
-    .then(data => {
-      return data.map(e => {
-        return e.id_author;
-      });
-    });
- 
-};
-
-
-// function getAuthor(bookId){
- 
-// }
 
 
 exports.booksDbSetup = function(database) {
@@ -61,30 +45,14 @@ exports.booksGET = function(offset,limit) {
  * returns List
  **/
 exports.getBookAuthor = function(bookId) {
+
+  var subquery = sqlDb('written').where('id_libro', '=', bookId).select('id_author');
   
-  var response = "none";
-  let p1;
-
-
-  getAuthorId(bookId).then(data=> {
-
-    var authorId = data;
-    console.log("Search Author = "+ authorId);
-    
-    p1 =  sqlDb("authors")
-    .where('id','=',authorId)
-    .then(res=>function(){
-      response = res;
-    });
-
-    return;
-
+  return sqlDb("authors")
+  .where('id', 'in', subquery)
+  .then(data => {
+    return data;
   });
-
-  return p1.then(res=>{
-    return res;
-  });
-  
 }
 
 
@@ -99,10 +67,7 @@ exports.getBookById = function(bookId) {
   return sqlDb("books")
   .where('id','=',bookId)
   .then(data => {
-    return data.map(e => {
-      e.price = { valuse: e.value, currency: e.currency };
-      return e;
-    });
+    return data;
   });
 }
 
@@ -115,26 +80,15 @@ exports.getBookById = function(bookId) {
  * returns List
  **/
 exports.getBookEvent = function(bookId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "name" : "Book Expo",
-  "location" : "Politecnico di Milano",
-  "date" : "21-10-1998"
-}, {
-  "id" : 0,
-  "name" : "Book Expo",
-  "location" : "Politecnico di Milano",
-  "date" : "21-10-1998"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  var subquery = sqlDb("presented").where('id_book', '=', bookId).select('id_event');
+
+  return sqlDb("events")
+  .where('id', 'in', subquery)
+  .then(data => {
+    return data;
+  })
 }
+
 
 
 /**
@@ -145,15 +99,9 @@ exports.getBookEvent = function(bookId) {
  * returns IdObject
  **/
 exports.getBookId = function(bookName) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "value" : 0.8008281904610115
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+  return sqlDb("books")
+  .where('name','=',bookName)
+  .then(data => {
+    return data;
   });
 }
