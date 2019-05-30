@@ -76,3 +76,33 @@ exports.userRegisterPOST = function(body) {
   });
 }
 
+/**
+ * Get actual user name
+ * Returns string
+ *
+ * returns String
+ **/
+exports.getUserName = function() {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = "";
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+
+/**
+ * reserveBook
+ * Logged user Reserve Book
+ *
+ * bookId String 
+ * no response value expected for this operation
+ **/
+exports.userReserveBook = function(bookId) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}

@@ -58,3 +58,15 @@ module.exports.getBookId = function getBookId (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.getSimilaarBook = function getSimilarBook (req, res, next) {
+  var bookId = req.swagger.params['bookId'].value;
+  Book.getSimilaarBook(bookId)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
