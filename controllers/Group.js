@@ -44,3 +44,14 @@ module.exports.getThemesList = function getThemesList (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.getGroupBooks = function getGroupBooks (req, res, next) {
+  var groupName = req.swagger.params['groupName'].value;
+  Group.getGroupBooks(groupName)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
