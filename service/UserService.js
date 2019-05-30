@@ -25,23 +25,25 @@ exports.userDbSetup = function(database) {
 exports.userLoginPOST = function(username,password) {
   return new Promise(function(resolve, reject) {
 
-    // sqlDb("users")
-    // .where('user', '=', username)
-    // .then(result => {
-    //   if(result.password == password){
-    //     resolve();
-    //   }else{
-    //     reject("Wrong Password");
-    //   }
-    // }).catch(function(){
-    //   reject("Wrong Name");
-    // });
 
-    if(username == "admin" && password == "abc"){
-      resolve();
-    }else{
-      reject("Wrong Password");
-    }
+    return sqlDb("users")
+    .where('name_user', '=', username)
+    .then(result => {
+      console.log(result);
+      if(result[0].password == password){
+        resolve();
+      }else{
+        reject("Wrong Password");
+      }
+    }).catch(function(){
+      reject("Wrong Name");
+    });
+
+    // if(username == "admin" && password == "abc"){
+    //   resolve();
+    // }else{
+    //   reject("Wrong Password");
+    // }
 
   });
 }
