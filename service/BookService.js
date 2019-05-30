@@ -105,3 +105,33 @@ exports.getBookId = function(bookName) {
     return data;
   });
 }
+
+
+
+/**
+ * Find similar book
+ * Returns a book
+ *
+ * bookId Long ID of book to return
+ * returns Book
+ **/
+exports.getSimilarBook = function(bookId) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "id" : 0,
+  "title" : "Il deserto dei tartari",
+  "author" : "Dino Buzzati",
+  "price" : {
+    "value" : 10,
+    "currency" : "eur"
+  },
+  "status" : "available"
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}

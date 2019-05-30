@@ -54,3 +54,25 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+
+module.exports.getUserName = function getUserName (req, res, next) {
+  User.getUserName()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.userReserveBook = function userReserveBook (req, res, next) {
+  var bookId = req.swagger.params['bookId'].value;
+  User.userReserveBook(bookId)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
