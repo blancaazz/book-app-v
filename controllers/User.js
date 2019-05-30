@@ -22,6 +22,7 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
     })
     .catch(function (response) {
       req.session = null;
+      console.log(username + password);
       utils.writeJson(res, response, 404);
     });
 };

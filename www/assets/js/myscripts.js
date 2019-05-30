@@ -75,7 +75,7 @@ $(document).ready(function(){
         
         console.log("Button clicked");
 
-        var url = 'v2/books';
+        var url = '/v2/books';
 
         var xhttp = createCORSRequest('GET', url);
         if (!xhttp) {
