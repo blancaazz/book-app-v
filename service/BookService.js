@@ -116,22 +116,11 @@ exports.getBookId = function(bookName) {
  * returns Book
  **/
 exports.getSimilarBook = function(bookId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  var subquery = sqlDb("similar").where('id_book', '=', bookId).select('others');
+  var subq = subquery.join(", ");
+  return sqlDb("books")
+  .where('id', '<@', subq)
+  .then(data => {
+    return data;
+  })
 }

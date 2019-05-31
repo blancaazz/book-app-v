@@ -59,9 +59,9 @@ module.exports.getBookId = function getBookId (req, res, next) {
     });
 };
 
-module.exports.getSimilaarBook = function getSimilarBook (req, res, next) {
+module.exports.getSimilarBook = function getSimilarBook (req, res, next) {
   var bookId = req.swagger.params['bookId'].value;
-  Book.getSimilaarBook(bookId)
+  Book.getSimilarBook(bookId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
