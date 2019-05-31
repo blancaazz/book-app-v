@@ -71,7 +71,7 @@ module.exports.getUserName = function getUserName (req, res, next) {
 
 module.exports.userReserveBook = function userReserveBook (req, res, next) {
   var bookId = req.swagger.params['bookId'].value;
-  User.userReserveBook(bookId)
+  User.userReserveBook(bookId,req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -79,3 +79,25 @@ module.exports.userReserveBook = function userReserveBook (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.userDeleteReserve = function userDeleteReserve (req, res, next) {
+  var bookId = req.swagger.params['bookId'].value;
+  User.userDeleteReserve(bookId)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.getShoppingCart = function getShoppingCart (req, res, next) {
+  User.getShoppingCart(req.session.name)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+

@@ -545,6 +545,24 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
+  /user/getUserName:
+    get:
+      tags:
+      - "user"
+      summary: "Get actual user name"
+      description: "Returns string"
+      operationId: "getUserName"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "User Name"
+          schema:
+            type: "string"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
   /user/reserveBook:
     post:
       tags:
@@ -567,21 +585,45 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
-  /user/getUserName:
+  /user/deleteReservedBook:
+    post:
+      tags:
+      - "user"
+      summary: "reserveBook"
+      description: "Logged user Reserve Book"
+      operationId: "userDeleteReserve"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Succesfully Removed"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/getShoppingCart:
     get:
       tags:
       - "user"
-      summary: "Get actual user name"
-      description: "Returns string"
-      operationId: "getUserName"
+      summary: "Get actual user shopping cart"
+      description: "Returns array of books"
+      operationId: "getShoppingCart"
       produces:
       - "application/json"
       parameters: []
       responses:
         200:
-          description: "User Name"
+          description: "A collection of Books"
           schema:
-            type: "string"
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"

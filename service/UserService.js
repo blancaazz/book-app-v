@@ -25,7 +25,6 @@ exports.userDbSetup = function(database) {
 exports.userLoginPOST = function(username,password) {
   return new Promise(function(resolve, reject) {
 
-
     return sqlDb("users")
     .where('name_user', '=', username)
     .then(result => {
@@ -38,12 +37,6 @@ exports.userLoginPOST = function(username,password) {
     }).catch(function(){
       reject("Wrong Name");
     });
-
-    // if(username == "admin" && password == "abc"){
-    //   resolve();
-    // }else{
-    //   reject("Wrong Password");
-    // }
 
   });
 }
@@ -103,8 +96,43 @@ exports.getUserName = function(userId) {
  * bookId String 
  * no response value expected for this operation
  **/
-exports.userReserveBook = function(bookId) {
+exports.userReserveBook = function(bookId,userId) {
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .update({
+    reserves: sqlDb.raw('array_append(reserves,?)', [bookId])
+  })
+}
+
+/**
+ * reserveBook
+ * Logged user Reserve Book
+ *
+ * bookId String 
+ * no response value expected for this operation
+ **/
+exports.userDeleteReserve = function(bookId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
+
+
+
+/**
+ * Get actual user shopping cart
+ * Returns array of books
+ *
+ * returns List
+ **/
+exports.getShoppingCart = function(userId) {
+  //var subquery = sqlDb('users').where('id', '=', userId).select('reserves').map;
+  
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .select('reserves')
+  .map(e=>function(e){
+    return e;
+  });
+}
+
