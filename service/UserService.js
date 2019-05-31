@@ -25,25 +25,18 @@ exports.userDbSetup = function(database) {
 exports.userLoginPOST = function(username,password) {
   return new Promise(function(resolve, reject) {
 
-
     return sqlDb("users")
     .where('name_user', '=', username)
     .then(result => {
-      console.log(result);
+      //console.log(result);
       if(result[0].password == password){
-        resolve();
+        resolve(result[0].id);
       }else{
         reject("Wrong Password");
       }
     }).catch(function(){
       reject("Wrong Name");
     });
-
-    // if(username == "admin" && password == "abc"){
-    //   resolve();
-    // }else{
-    //   reject("Wrong Password");
-    // }
 
   });
 }
@@ -82,16 +75,18 @@ exports.userRegisterPOST = function(body) {
  *
  * returns String
  **/
-exports.getUserName = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+exports.getUserName = function(userId) {
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .then(result => {
+    console.log(result[0].name_user),
+    resolve(result[0].name_user);
+    return result[0].name_user;
+    
+  }).catch(function(){
+    reject("Wrong Id");
   });
+
 }
 
 /**
@@ -101,8 +96,43 @@ exports.getUserName = function() {
  * bookId String 
  * no response value expected for this operation
  **/
-exports.userReserveBook = function(bookId) {
+exports.userReserveBook = function(bookId,userId) {
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .update({
+    reserves: sqlDb.raw('array_append(reserves,?)', [bookId])
+  })
+}
+
+/**
+ * reserveBook
+ * Logged user Reserve Book
+ *
+ * bookId String 
+ * no response value expected for this operation
+ **/
+exports.userDeleteReserve = function(bookId) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
 }
+
+
+
+/**
+ * Get actual user shopping cart
+ * Returns array of books
+ *
+ * returns List
+ **/
+exports.getShoppingCart = function(userId) {
+  //var subquery = sqlDb('users').where('id', '=', userId).select('reserves').map;
+  
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .select('reserves')
+  .map(e=>function(e){
+    return e;
+  });
+}
+

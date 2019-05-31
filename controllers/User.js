@@ -13,9 +13,10 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
       //LOGIN
       if(!req.session.loggedin) {        
         req.session.loggedin = true;
+        req.session.name = response;
         console.log("Need to Log in");
       } else {
-         console.log("Already Logged in");
+         console.log("Already Logged in: "+req.session.name);
       }
 
       utils.writeJson(res, response);
@@ -31,6 +32,7 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
 module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
 
   req.session = null;
+  //req.session.name = "";
 
   console.log("Logout");
 
@@ -57,7 +59,8 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 
 module.exports.getUserName = function getUserName (req, res, next) {
-  User.getUserName()
+  console.log("Getting name of: "+ req.session.name);
+  User.getUserName(req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -68,7 +71,7 @@ module.exports.getUserName = function getUserName (req, res, next) {
 
 module.exports.userReserveBook = function userReserveBook (req, res, next) {
   var bookId = req.swagger.params['bookId'].value;
-  User.userReserveBook(bookId)
+  User.userReserveBook(bookId,req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -76,3 +79,25 @@ module.exports.userReserveBook = function userReserveBook (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.userDeleteReserve = function userDeleteReserve (req, res, next) {
+  var bookId = req.swagger.params['bookId'].value;
+  User.userDeleteReserve(bookId)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.getShoppingCart = function getShoppingCart (req, res, next) {
+  User.getShoppingCart(req.session.name)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
