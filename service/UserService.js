@@ -29,9 +29,9 @@ exports.userLoginPOST = function(username,password) {
     return sqlDb("users")
     .where('name_user', '=', username)
     .then(result => {
-      console.log(result);
+      //console.log(result);
       if(result[0].password == password){
-        resolve();
+        resolve(result[0].id);
       }else{
         reject("Wrong Password");
       }
@@ -82,16 +82,18 @@ exports.userRegisterPOST = function(body) {
  *
  * returns String
  **/
-exports.getUserName = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+exports.getUserName = function(userId) {
+  return sqlDb("users")
+  .where('id', '=', userId)
+  .then(result => {
+    console.log(result[0].name_user),
+    resolve(result[0].name_user);
+    return result[0].name_user;
+    
+  }).catch(function(){
+    reject("Wrong Id");
   });
+
 }
 
 /**

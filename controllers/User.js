@@ -13,9 +13,10 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
       //LOGIN
       if(!req.session.loggedin) {        
         req.session.loggedin = true;
+        req.session.name = response;
         console.log("Need to Log in");
       } else {
-         console.log("Already Logged in");
+         console.log("Already Logged in: "+req.session.name);
       }
 
       utils.writeJson(res, response);
@@ -31,6 +32,7 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
 module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
 
   req.session = null;
+  //req.session.name = "";
 
   console.log("Logout");
 
@@ -57,7 +59,8 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 
 module.exports.getUserName = function getUserName (req, res, next) {
-  User.getUserName()
+  console.log("Getting name of: "+ req.session.name);
+  User.getUserName(req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
