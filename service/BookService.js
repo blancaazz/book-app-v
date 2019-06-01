@@ -80,7 +80,9 @@ exports.getBookById = function(bookId) {
  * returns List
  **/
 exports.getBookEvent = function(bookId) {
+  
   var subquery = sqlDb("presented").where('id_book', '=', bookId).select('id_event');
+  console.log(subquery);
 
   return sqlDb("events")
   .where('id', 'in', subquery)
@@ -116,10 +118,11 @@ exports.getBookId = function(bookName) {
  * returns Book
  **/
 exports.getSimilarBook = function(bookId) {
-  var subquery = sqlDb("similar").where('id_book', '=', bookId).select('others');
-  var subq = subquery.join(", ");
+
+  var subquery = sqlDb("similar").where('id_book', '=', bookId).select('id_other');
+  
   return sqlDb("books")
-  .where('id', '<@', subq)
+  .where('id', 'in', subquery)
   .then(data => {
     return data;
   })

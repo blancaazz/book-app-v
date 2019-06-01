@@ -84,32 +84,18 @@ exports.getThemesList = function() {
  * returns List
  **/
 exports.getGroupBooks = function(groupName) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-}, {
-  "id" : 0,
-  "title" : "Il deserto dei tartari",
-  "author" : "Dino Buzzati",
-  "price" : {
-    "value" : 10,
-    "currency" : "eur"
-  },
-  "status" : "available"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  var subquery = [];
+  if(groupName == "favourites"){
+    subquery = sqlDb("favourites").select('id');
+
+  }
+  else if(groupName == "best_sellers"){
+    subquery = sqlDb("best_sellers").select('id');
+  }
+  return sqlDb("books")
+  .where('id', 'in', subquery)
+  .then(data =>{
+    return data;
+  })
 }
 
