@@ -25,7 +25,7 @@ function createCORSRequest(method, url) {
 
 }
 
-function newListElement(iTitle,iData1,image) {
+function newListElement(iTitle,iData1,image, id) {
 
   var container = document.createElement("div");
   var divRow = document.createElement("div");
@@ -37,6 +37,14 @@ function newListElement(iTitle,iData1,image) {
   
   var data1 = document.createElement("p");
   var textData1 = document.createTextNode(iData1);
+  
+/*probanding*/
+
+  var url = document.createElement("a");
+  var textUrl = document.createTextNode("Leer mas");
+  url.appendChild(textUrl);
+  url.href = 'book.html?id=' +  id;
+   
 
 
   var img = document.createElement("img");
@@ -52,6 +60,8 @@ function newListElement(iTitle,iData1,image) {
   title.appendChild(textTitle);
 
   data1.appendChild(textData1);
+
+  data1.appendChild(url);
 
   divLeftCol.appendChild(title);
   divLeftCol.appendChild(data1);
@@ -71,7 +81,7 @@ function newListElement(iTitle,iData1,image) {
 $(document).ready(function(){
     
 
-    $("button").click(function(){
+   // $("button").click(function(){
         
         console.log("Button clicked");
 
@@ -94,13 +104,14 @@ $(document).ready(function(){
           for(var i =0; i<myObj.length;i++){
             var name =myObj[i].name;
             var themes = myObj[i].themes;
-            newListElement(name,themes,"WW");
+            var id = myObj[i].id;
+            newListElement(name,themes,"WW", id);
           }
         };
 
         xhttp.send();
 
-    });
+  //  });
 
 });
 
