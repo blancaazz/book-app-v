@@ -38,23 +38,37 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
     document.getElementById("image").appendChild(img);
    
   //título
-    var title = document.createElement("h3");
+    var title = document.createElement("h1");
     var textTitle = document.createTextNode(iTitle);
     title.appendChild(textTitle);
     document.getElementById("description").appendChild(title);
 
 
   //lista de géneros      
+    /*
     var genresH = document.createElement("h5");
     var genresText = "";
     for (var i= 0; i < genres.length; i++){
       genresText += genres[i] + "   ,   ";
     }
-    $("#textito").text(genresText);
+    //$("#textito").text(genresText);
 
     var textGenres = document.createTextNode(genresText);
     genresH.appendChild(textGenres);
     document.getElementById("genres").appendChild(genresH);
+    */
+    //var genresC = document.createElement("div");
+
+    var genreC = document.getElementById("genres");
+    genreC.class = "genresClass";
+    for(var i = 0; i < genres.length; i++){
+      var genresH = document.createElement("h5");
+      var textGenres = document.createTextNode(genres[i]);
+      genresH.appendChild(textGenres);
+      //genresC.appendChild(genresH);
+      genreC.appendChild(genresH);
+    }
+
 
     //en plan los temas y géneros faltaría hacerlos más bonito metiendolos
   //en una listilla guapetona
@@ -64,7 +78,7 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
     for (var i= 0; i < themes.length; i++){
       themesText += themes[i] + "   ,   ";
     }
-    $("#textito").text(themesText);
+    //$("#textito").text(themesText);
 
     var textThemes = document.createTextNode(themesText);
     themesH.appendChild(textThemes);
@@ -102,7 +116,7 @@ function addElement(){
 function addAuthor(id_book){
   var url = '/v2/books/getAuthor/'+ id_book;
 
-  $("#textito").text(url);
+  //$("#textito").text(url);
 
   var xhttp = createCORSRequest('GET', url);
   if (!xhttp) {
@@ -138,46 +152,51 @@ function addAuthor(id_book){
 //función pa poner los elementos html y la info:
 
 function AddInfoAuthor(id, name, picture, bio){
-  $("#textito").text(name);
+  //$("#textito").text(name);
 
   //PARTE de crear los elementos html
   var container = document.createElement("div");
-  container.class = "card";
+  container.class = "card-body";
 
+  //imagen
   var img = document.createElement("img");
   img.src = "assets/img/portfolio/4-thumbnail.jpg";
   img.class = "card-img-top";
 
-  var cardBody = document.createElement("div");
-  cardBody.class = "card-body";
-
-  var nameH = document.createElement("h4");
-  nameH.class = "card-title";
-  
+  //name del autor
+  var nameH = document.createElement("h3");
+  nameH.class="card-title"; 
   var nameText = document.createTextNode(name);
   nameH.appendChild(nameText);
-  
 
+  //Nombre del autor pa ponerlo debajo del titulo del libro:
+
+  var nameHBook = document.createElement("h3"); 
+  var nameTextBook = document.createTextNode(name);
+  nameHBook.appendChild(nameTextBook);
+  
+  //bio
   var bioP = document.createElement("p");
   bioP.class = "card-text";
-  
   var bioText = document.createTextNode(bio);
   bioP.appendChild(bioText);
 
+  //link a la página del autor/a
   var aAuthor = document.createElement("a");
   var aText = document.createTextNode("Go to this author");
-  aAuthor.class = "btn btn-primary";
   aAuthor.href = "author.html?id=" + id;
   aAuthor.appendChild(aText);
 
-  cardBody.appendChild(nameH);
-  cardBody.appendChild(bioP);
-  cardBody.appendChild(aAuthor);
 
-  container.appendChild(img);
-  container.appendChild(cardBody);
+  container.appendChild(nameH);
+  container.appendChild(bioP);
+  container.appendChild(aAuthor);
 
-  document.getElementById("author").appendChild(container);
+  document.getElementById("author_card").appendChild(img);
+  document.getElementById("author_card").appendChild(container);
+  document.getElementById("author_book").appendChild(nameHBook);
+
+
 }
 
 
@@ -195,11 +214,11 @@ $(document).ready(function(){
 
     //console.log("Poniendo ready esto");
 
-    $("#textito").text(GET["id"]);
+    //$("#textito").text(GET["id"]);
 
     var url = '/v2/books/'+ GET["id"];
 
-    $("#textito").text(url);
+    //$("#textito").text(url);
 
     var xhttp = createCORSRequest('GET', url);
     if (!xhttp) {
@@ -222,7 +241,7 @@ $(document).ready(function(){
       var fact_sheet = myObj[0].fact_sheet;
       var picture = myObj[0].picture;
 
-      $("#textito").text(literary_genres);
+      //$("#textito").text(literary_genres);
       newListElement(name, abstract,"WW", literary_genres, themes, fact_sheet);
       addAuthor(id);
     
