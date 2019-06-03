@@ -7,14 +7,33 @@
 /* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
     margin-bottom: 0;
+    background-color: blueviolet;
   }
      
 /* Add a gray background color and some padding to the footer */
+/*
   footer {
     background-color: #f2f2f2;
     padding: 25px;
   }
+  */
+  ul#genres {
+    list-style : none;
+    
+  }
 
-  .genresClass {
-    display: inline;
+  ul#genres li {
+    display: inline-block;
+    color : blueviolet;
+    padding : 10px 15px 10px 0px;
+  }
+
+  ul#themes li{
+    display: inline-block;
+    color : blue;
+    padding : 10px 15px 10px 0px;
+  }
+
+  #carousel1 {
+    display: inline-block;
   }

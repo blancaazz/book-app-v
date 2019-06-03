@@ -59,30 +59,30 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
     */
     //var genresC = document.createElement("div");
 
-    var genreC = document.getElementById("genres");
-    genreC.class = "genresClass";
+;
     for(var i = 0; i < genres.length; i++){
-      var genresH = document.createElement("h5");
+      var genresC = document.createElement("li");
+      var genresH = document.createElement("p");
       var textGenres = document.createTextNode(genres[i]);
       genresH.appendChild(textGenres);
-      //genresC.appendChild(genresH);
-      genreC.appendChild(genresH);
+      genresC.appendChild(genresH);
+      document.getElementById("genres").appendChild(genresC);
     }
 
 
     //en plan los temas y géneros faltaría hacerlos más bonito metiendolos
   //en una listilla guapetona
   //lista de temas
-    var themesH = document.createElement("h5");
-    var themesText = "";
-    for (var i= 0; i < themes.length; i++){
-      themesText += themes[i] + "   ,   ";
+    for(var i = 0; i < themes.length; i++){
+      var themesC = document.createElement("li");
+      var themesH = document.createElement("p");
+      var textThemes = document.createTextNode(themes[i]);
+      themesH.appendChild(textThemes);
+      themesC.appendChild(themesH);
+      document.getElementById("themes").appendChild(themesC);
     }
     //$("#textito").text(themesText);
 
-    var textThemes = document.createTextNode(themesText);
-    themesH.appendChild(textThemes);
-    document.getElementById("themes").appendChild(themesH);
 
     //abstract
     var abstract = document.createElement("p");
@@ -141,6 +141,88 @@ function addAuthor(id_book){
   //}
     AddInfoAuthor(id, name, picture, bio);
 
+
+};
+
+  xhttp.send();
+
+}
+
+function addListSimilar(id, name, picture, numero){
+  
+  if((numero % 3) == 0){
+    console.log("holi")
+    var container = document.createElement("div");
+    container.class = "carousel-item";
+    var list = document.createElement("ul");
+    list.id = "lista" + parseInt(numero / 3);
+    $("#textito").text(list.id);
+    //container.id = "carousel" + (numero / 3);
+    var element = document.createElement("li");
+    var nameH = document.createElement("h3");
+    var textName = document.createTextNode(name);
+    nameH.appendChild(textName);
+    var img = document.createElement("img");
+    img.src = "assets/img/portfolio/4-thumbnail.jpg";
+
+    element.appendChild(nameH);
+    element.appendChild(img);
+    list.appendChild(element);
+    container.appendChild(list);
+    document.getElementById("carouselSimilarInner").appendChild(container);
+    
+  }
+  
+  else{
+
+    var list = document.getElementById("lista" + parseInt(numero/3));
+
+    var element = document.createElement("li");
+    var nameH = document.createElement("h3");
+    var textName = document.createTextNode(name);
+    nameH.appendChild(textName);
+    var img = document.createElement("img");
+    img.src = "assets/img/portfolio/4-thumbnail.jpg";
+
+    element.appendChild(nameH);
+    element.appendChild(img);
+
+    //list.appendChild(element);
+    
+  }
+  
+  //$("#textito").text(numero);
+
+}
+
+function addSimilar(id_book){
+  var url = '/v2/books/getSimilar/'+ id_book;
+
+
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+      
+    var text = xhttp.responseText;
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+
+    var numero = 0;
+  //tener en cuenta que puede ser más de un autor(a)
+  for(var i =0; i<myObj.length;i++){
+    var id = myObj[i].id;
+    var name =myObj[i].name;
+    var picture = myObj[i].picture;
+   // $("#textito").text(numero % 3);
+    addListSimilar(id, name, picture, numero)
+    numero = numero + 1;
+  }
+  //$("#textito").text(2 % 3);
 
 };
 
@@ -244,6 +326,7 @@ $(document).ready(function(){
       //$("#textito").text(literary_genres);
       newListElement(name, abstract,"WW", literary_genres, themes, fact_sheet);
       addAuthor(id);
+      addSimilar(id);
     
   };
 
