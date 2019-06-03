@@ -7,10 +7,13 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
   var username = req.swagger.params['username'].value;
   var password = req.swagger.params['password'].value;
   
-  User.userLoginPOST(username,password)
-    .then(function (response) {
+  var statusCode = 200;
 
+
+  User.userLoginPOST(username,password)
+    .then(response=> {
       //LOGIN
+      console.log("Return message: "+ response);
       if(!req.session.loggedin) {        
         req.session.loggedin = true;
         req.session.name = response;
@@ -19,12 +22,13 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
          console.log("Already Logged in: "+req.session.name);
       }
 
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,"200");
+
     })
-    .catch(function (response) {
-      req.session = null;
-      console.log(username + password);
-      utils.writeJson(res, response, 404);
+    .catch(err=> {
+      // req.session = null;
+      console.log("Error logging: "+err);
+      //utils.writeJson(res, err);
     });
 };
 
