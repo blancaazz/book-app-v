@@ -22,18 +22,23 @@
     
   }
 
+/*
   ul#genres li {
-    display: inline-block;
+    display: inline-block; 
     color : blueviolet;
     padding : 10px 15px 10px 0px;
-  }
+  } 
 
   ul#themes li{
-    display: inline-block;
+    display: inline-block; 
     color : blue;
     padding : 10px 15px 10px 0px;
   }
+  
+*/
 
-  #carousel1 {
+  #carousell{
     display: inline-block;
+    color : green;
   }
+  

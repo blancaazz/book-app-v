@@ -62,6 +62,7 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
 ;
     for(var i = 0; i < genres.length; i++){
       var genresC = document.createElement("li");
+      genresC.className ="list-group-item"
       var genresH = document.createElement("p");
       var textGenres = document.createTextNode(genres[i]);
       genresH.appendChild(textGenres);
@@ -153,11 +154,12 @@ function addListSimilar(id, name, picture, numero){
   if((numero % 3) == 0){
     console.log("holi")
     var container = document.createElement("div");
-    container.class = "carousel-item";
+    container.className = "carousel-item";
+    //container.id = "carousell"
     var list = document.createElement("ul");
     list.id = "lista" + parseInt(numero / 3);
-    $("#textito").text(list.id);
-    //container.id = "carousel" + (numero / 3);
+   // $("#textito").text(list.id);
+    container.id = "carousel" + (numero / 3);
     var element = document.createElement("li");
     var nameH = document.createElement("h3");
     var textName = document.createTextNode(name);
@@ -165,10 +167,14 @@ function addListSimilar(id, name, picture, numero){
     var img = document.createElement("img");
     img.src = "assets/img/portfolio/4-thumbnail.jpg";
 
+   // container.appendChild(nameH);
+   // container.appendChild(img);
     element.appendChild(nameH);
     element.appendChild(img);
     list.appendChild(element);
     container.appendChild(list);
+
+  
     document.getElementById("carouselSimilarInner").appendChild(container);
     
   }
@@ -183,12 +189,18 @@ function addListSimilar(id, name, picture, numero){
     nameH.appendChild(textName);
     var img = document.createElement("img");
     img.src = "assets/img/portfolio/4-thumbnail.jpg";
+/*
+    document.getElementById("carousell").appendChild(nameH);
+    document.getElementById("carousell").appendChild(img);
+    */
+
+
 
     element.appendChild(nameH);
     element.appendChild(img);
 
-    //list.appendChild(element);
-    
+    list.appendChild(element);
+  
   }
   
   //$("#textito").text(numero);
