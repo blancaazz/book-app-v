@@ -23,35 +23,38 @@ exports.userDbSetup = function(database) {
  * no response value expected for this operation
  **/
 exports.userLoginPOST = function(username,password) {
-  // new Promise(function(resolve, reject) {
-  //   return sqlDb("users")
-  //   .where('name_user', '=', username)
-  //   .then(result => {
-  //     console.log(result);
-  //     if(result[0].password == password){
-  //       console.log("user");
-  //       resolve(result[0].id);
-  //     }else{
-  //       console.log("Wrong password");
-  //       reject(Error("Wrong Password"));
-  //     }
-  //   });
+  return new Promise(function(resolve, reject) {
+    sqlDb("users")
+    .where('name_user', '=', username)
+    .then(result => {
+      console.log(result);
+      if(result[0].password == password){
+        //console.log("user");
+        resolve(result[0].id);
+      }else{
+        console.log("Wrong password");
+        reject("Wrong Password");
+      }
+    }).catch(err=>{
+      console.log("Wrong user");
+      reject("Wrong user");
+    });
 
   
-  // });
-  
-  return sqlDb("users")
-  .where('name_user', '=', username)
-  .then(result => {
-    console.log(result);
-    if(result[0].password == password){
-      console.log("user");
-      return(result[0].id);
-    }else{
-      console.log("Wrong password");
-      return(Error("Wrong Password"));
-    }
   });
+  
+  // return sqlDb("users")
+  // .where('name_user', '=', username)
+  // .then(result => {
+  //   console.log(result);
+  //   if(result[0].password == password){
+  //     console.log("user");
+  //     return(result[0].id);
+  //   }else{
+  //     console.log("Wrong password");
+  //     return(Error("Wrong Password"));
+  //   }
+  // });
 
   
  
@@ -114,12 +117,9 @@ exports.getUserName = function(userId) {
  * no response value expected for this operation
  **/
 exports.userReserveBook = function(bookId,userId) {
-  // return sqlDb("users")
-  // .where('id', '=', userId)
-  // .update({
-  //   reserves: sqlDb.raw('array_append(reserves,?)', [bookId])
-  // })
+
   return sqlDb('reservations').insert({user_id: userId,book_id: bookId});
+  
 
 }
 
@@ -130,10 +130,11 @@ exports.userReserveBook = function(bookId,userId) {
  * bookId String 
  * no response value expected for this operation
  **/
-exports.userDeleteReserve = function(bookId) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.userDeleteReserve = function(bookId,userId) {
+ return sqlDb('reservations')
+ .where('user_id','=',userId)
+ .andWhere('book_id','=',bookId)
+ .del();
 }
 
 
@@ -148,9 +149,13 @@ exports.getShoppingCart = function(userId) {
   var subquery = sqlDb('reservations').where('user_id', '=', userId).select('book_id');
   
   return sqlDb("books")
-  .where('id', '=', userId)
+  .where('id', 'in', subquery)
   .then(data=>{
     return data;
   })
+
+  //return sqlDb('reservations').where('user_id', '=', userId).select('book_id');
+
+
 }
 

@@ -22,15 +22,58 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
          console.log("Already Logged in: "+req.session.name);
       }
 
-      utils.writeJson(res, response,"200");
+      
+      try {
+        utils.writeJson(res);
+      }
+      catch(err) {
+        console.log("Try error: "+err);
+      }
+
 
     })
     .catch(err=> {
-      // req.session = null;
+      req.session = null;
       console.log("Error logging: "+err);
-      //utils.writeJson(res, err);
+
+      try {
+        utils.writeJson(res);
+      }
+      catch(err) {
+        console.log("Try error: "+err);
+      }
+
     });
 };
+
+// module.exports.userLoginPOST = function userLoginPOST(req, res, next) {
+//   var username = req.swagger.params["username"].value;
+//   var password = req.swagger.params["password"].value;
+
+//   if(!req.session.loggedin) {
+//     if(req.session.isNew){
+//       req.session.loggedin = true;
+//       console.log("Need to Log in");
+//     }
+//   } else {
+//      req.session.loggedin = !req.session.loggedin;
+//      console.log("Already Log in");
+//   }
+
+//   User.userLoginPOST(username, password)
+//     .then(function(response) {
+//       try {
+//         utils.writeJson(res, response);
+//       }
+//       catch(err) {
+//         console.log("Try error: "+err);
+//       }
+//     })
+//     .catch(function(response) {
+//       console.log("error: "+response);
+//       utils.writeJson(res, response);
+//     });
+// };
 
 
 module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
@@ -86,7 +129,7 @@ module.exports.userReserveBook = function userReserveBook (req, res, next) {
 
 module.exports.userDeleteReserve = function userDeleteReserve (req, res, next) {
   var bookId = req.swagger.params['bookId'].value;
-  User.userDeleteReserve(bookId)
+  User.userDeleteReserve(bookId,req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
