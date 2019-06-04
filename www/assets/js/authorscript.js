@@ -51,8 +51,112 @@ function createCORSRequest(method, url) {
     document.getElementById("description_author").appendChild(bioP);
   }
 
+  function addBookElement(name, picture, genres, themes){
+
+    var item = document.createElement("li");
+    var container = document.createElement("div");
+    var row = document.createElement("div");
+    var col_left = document.createElement("div");
+    var col_right = document.createElement("div");
+
+    container.className = "container-fluid";
+    row.className = "row";
+    col_left.className = "col-sm-4";
+    col_right.className = "col-sm-8";
 
 
+
+      //imagen
+
+    var img = document.createElement("img");
+    img.className = "img-fluid";
+    img.src = picture;
+     
+    //título
+    var title = document.createElement("h1");
+    var textTitle = document.createTextNode(name);
+    title.appendChild(textTitle);
+  
+  
+    //lista de géneros      
+
+    var list_genres = document.createElement("ul");
+    list_genres.className = "list-group list-group-horizontal";
+    for(var i = 0; i < genres.length; i++){
+      var genresC = document.createElement("li");
+      genresC.className ="list-group-item"
+      var genresH = document.createElement("p");
+      var textGenres = document.createTextNode(genres[i]);
+      genresH.appendChild(textGenres);
+      genresC.appendChild(genresH);
+      list_genres.appendChild(genresC);
+    }
+  
+  
+      //en plan los temas y géneros faltaría hacerlos más bonito metiendolos
+    //en una listilla guapetona
+    //lista de temas
+
+    var list_themes = document.createElement("ul");
+    list_themes.className = "list-group list-group-horizontal";
+    for(var i = 0; i < themes.length; i++){
+      var themesC = document.createElement("li");
+      themesC.className = "list-group-item";
+      var themesH = document.createElement("p");
+      var textThemes = document.createTextNode(themes[i]);
+      themesH.appendChild(textThemes);
+      themesC.appendChild(themesH);
+      list_themes.appendChild(themesC);
+    }
+
+    col_left.appendChild(img);
+    col_right.appendChild(title);
+    col_right.appendChild(list_genres);
+    col_right.appendChild(list_themes);
+
+
+    row.appendChild(col_left);
+    row.appendChild(col_right);
+  
+    container.appendChild(row);
+    item.appendChild(container);
+
+    document.getElementById("book_list").appendChild(item);
+  }
+
+  function addBookList(id){
+
+    var url = '/v2/authors/getBooks/'+ id;
+
+    //$("#textito").text(url);
+
+    var xhttp = createCORSRequest('GET', url);
+    if (!xhttp) {
+        throw new Error('CORS not supported');
+    }
+
+    xhttp.onload = function() {
+      
+      var text = xhttp.responseText;
+      //$("#response").text(text);
+
+      var myJSON = text;
+      var myObj = JSON.parse(myJSON);
+      for (var i = 0; i < myObj.length; i++){
+        var name =myObj[i].name;
+        var id = myObj[i].id;
+        var picture = myObj[i].picture;
+        var literary_genres = myObj[i].literary_genres;
+        var themes = myObj[i].themes;
+        addBookElement(name, picture, literary_genres, themes);
+      }
+
+      //$("#textito").text(name);
+  };
+
+    xhttp.send();
+
+  }
 
   $(document).ready(function(){
 
@@ -95,7 +199,8 @@ function createCORSRequest(method, url) {
 
       //$("#textito").text(name);
 
-    AddInfoAuthor(id, name, picture, bio);
+      AddInfoAuthor(id, name, picture, bio);
+      addBookList(id);
   };
 
     xhttp.send();
