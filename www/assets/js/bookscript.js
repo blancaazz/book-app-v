@@ -34,7 +34,7 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
 
     var img = document.createElement("img");
     img.className = "img-fluid";
-    img.src = "assets/img/portfolio/4-thumbnail.jpg";
+    img.src = image;
     document.getElementById("image").appendChild(img);
    
   //título
@@ -76,6 +76,7 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
   //lista de temas
     for(var i = 0; i < themes.length; i++){
       var themesC = document.createElement("li");
+      themesC.className = "list-group-item";
       var themesH = document.createElement("p");
       var textThemes = document.createTextNode(themes[i]);
       themesH.appendChild(textThemes);
@@ -154,18 +155,24 @@ function addListSimilar(id, name, picture, numero){
   if((numero % 3) == 0){
     console.log("holi")
     var container = document.createElement("div");
-    container.className = "carousel-item";
+    if (numero == 0){
+      container.className = "carousel-item active";
+    }
+    else{
+      container.className = "carousel-item";
+    }
     //container.id = "carousell"
     var list = document.createElement("ul");
+    list.className = "list-group list-group-horizontal";
     list.id = "lista" + parseInt(numero / 3);
    // $("#textito").text(list.id);
-    container.id = "carousel" + (numero / 3);
+    //container.id = "carousel" + (numero / 3);
     var element = document.createElement("li");
     var nameH = document.createElement("h3");
     var textName = document.createTextNode(name);
     nameH.appendChild(textName);
     var img = document.createElement("img");
-    img.src = "assets/img/portfolio/4-thumbnail.jpg";
+    img.src = picture;
 
    // container.appendChild(nameH);
    // container.appendChild(img);
@@ -188,7 +195,7 @@ function addListSimilar(id, name, picture, numero){
     var textName = document.createTextNode(name);
     nameH.appendChild(textName);
     var img = document.createElement("img");
-    img.src = "assets/img/portfolio/4-thumbnail.jpg";
+    img.src = picture;
 /*
     document.getElementById("carousell").appendChild(nameH);
     document.getElementById("carousell").appendChild(img);
@@ -203,7 +210,7 @@ function addListSimilar(id, name, picture, numero){
   
   }
   
-  //$("#textito").text(numero);
+  $("#textito").text(numero);
 
 }
 
@@ -254,7 +261,7 @@ function AddInfoAuthor(id, name, picture, bio){
 
   //imagen
   var img = document.createElement("img");
-  img.src = "assets/img/portfolio/4-thumbnail.jpg";
+  img.src = picture;
   img.class = "card-img-top";
 
   //name del autor
@@ -336,7 +343,7 @@ $(document).ready(function(){
       var picture = myObj[0].picture;
 
       //$("#textito").text(literary_genres);
-      newListElement(name, abstract,"WW", literary_genres, themes, fact_sheet);
+      newListElement(name, abstract, picture, literary_genres, themes, fact_sheet);
       addAuthor(id);
       addSimilar(id);
     

@@ -31,43 +31,24 @@ function createCORSRequest(method, url) {
     $("#textito").text(name);
   
     //PARTE de crear los elementos html
-    var container = document.createElement("div");
-    container.class = "card";
   
     var img = document.createElement("img");
-    img.src = "assets/img/portfolio/4-thumbnail.jpg";
-    img.class = "card-img-top";
+    img.src = picture;
+    img.className = "imag-fluid";
   
-    var cardBody = document.createElement("div");
-    cardBody.class = "card-body";
   
     var nameH = document.createElement("h4");
-    nameH.class = "card-title";
-    
     var nameText = document.createTextNode(name);
     nameH.appendChild(nameText);
     
   
-    var bioP = document.createElement("p");
-    bioP.class = "card-text";
-    
+    var bioP = document.createElement("p");   
     var bioText = document.createTextNode(bio);
     bioP.appendChild(bioText);
   
-    var aAuthor = document.createElement("a");
-    var aText = document.createTextNode("Go to this author");
-    aAuthor.class = "btn btn-primary";
-    aAuthor.href = "author.html?id=" + id;
-    aAuthor.appendChild(aText);
-  
-    cardBody.appendChild(nameH);
-    cardBody.appendChild(bioP);
-    cardBody.appendChild(aAuthor);
-  
-    container.appendChild(img);
-    container.appendChild(cardBody);
-  
-    document.getElementById("author").appendChild(container);
+    document.getElementById("image_author").appendChild(img);
+    document.getElementById("description_author").appendChild(nameH);
+    document.getElementById("description_author").appendChild(bioP);
   }
 
 
