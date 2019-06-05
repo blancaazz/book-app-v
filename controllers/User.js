@@ -118,12 +118,15 @@ module.exports.getUserName = function getUserName (req, res, next) {
 
 module.exports.userReserveBook = function userReserveBook (req, res, next) {
   var bookId = req.swagger.params['bookId'].value;
+
+  console.log("Adding book: "+bookId+" by: "+req.session.name);
+
   User.userReserveBook(bookId,req.session.name)
     .then(function (response) {
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,404);
     });
 };
 

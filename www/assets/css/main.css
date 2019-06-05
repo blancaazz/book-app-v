@@ -65,3 +65,12 @@ body {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     margin-bottom: 16px;
   }
+
+
+  .row {    
+    left: 15%;
+    right: 15%;
+    position: absolute;
+    top: 15%;
+    text-align: center;
+  }

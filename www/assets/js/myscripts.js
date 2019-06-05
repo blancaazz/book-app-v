@@ -48,7 +48,7 @@ function newListElement(iTitle,iData1,image, id) {
 
 
   var img = document.createElement("img");
-  img.src = "assets/img/portfolio/4-thumbnail.jpg";
+  img.src = image;
 
   container.className="container features";
   divRow.className = "row";
@@ -105,7 +105,8 @@ $(document).ready(function(){
             var name =myObj[i].name;
             var themes = myObj[i].themes;
             var id = myObj[i].id;
-            newListElement(name,themes,"WW", id);
+            var img = myObj[i].picture;
+            newListElement(name,themes,img, id);
           }
         };
 

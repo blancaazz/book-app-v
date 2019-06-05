@@ -72,6 +72,25 @@ function addThemes(){
 
 //FIN NAVBAaAAAAr
 
+function reserveBook(bookId,loadFunction){
+  var request = "bookId="+bookId;
+
+  var url = '/v2/user/reserveBook';
+
+  xhttp = createCORSRequest('POST', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhttp.onload = function() {
+    console.log("Book added: "+ xhttp.status);
+    loadFunction();
+  };
+
+  xhttp.send(request);
+}
 
 //función que pone el titulito, imagen y las cosillas propias de la base de datos del libro
 
@@ -106,7 +125,6 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
     */
     //var genresC = document.createElement("div");
 
-;
     for(var i = 0; i < genres.length; i++){
       var genresC = document.createElement("li");
       genresC.className ="list-group-item"
@@ -159,7 +177,9 @@ function addElement(){
   currentDiv.appendChild(newDir);
 }
 
-  
+ 
+
+
 //función para obtener los datos del autor/a
 
 function addAuthor(id_book){
@@ -248,8 +268,6 @@ function addListSimilar(id, name, picture, numero){
     document.getElementById("carousell").appendChild(img);
     */
 
-
-
     element.appendChild(nameH);
     element.appendChild(img);
 
@@ -258,13 +276,10 @@ function addListSimilar(id, name, picture, numero){
   }
   
   //$("#textito").text(numero);
-
 }
 
 function addSimilar(id_book){
   var url = '/v2/books/getSimilar/'+ id_book;
-
-
 
   var xhttp = createCORSRequest('GET', url);
   if (!xhttp) {
@@ -359,7 +374,11 @@ $(document).ready(function(){
   addThemes();
   addGenres();
 
-	var GET = {};
+
+  var bookID;
+  
+  //Getting the ID from the URL
+  var GET = {};
 	var query = window.location.search.substring(1).split("&");
 	for (var i = 0, max = query.length; i < max; i++) {
 		if (query[i] === "") // check for trailing & with no param
@@ -367,44 +386,57 @@ $(document).ready(function(){
 		var param = query[i].split("=");
 		GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
 	}
+  
+  //Variable with the actual book ID;
+  bookID = GET["id"];
+
+  //console.log("Poniendo ready esto");
+
+  //$("#textito").text(GET["id"]);
+
+  var url = '/v2/books/'+ bookID;
+
+  //$("#textito").text(url);
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
     
+    var text = xhttp.responseText;
+    //$("#response").text(text);
 
-    //console.log("Poniendo ready esto");
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
 
-    //$("#textito").text(GET["id"]);
+    var name =myObj[0].name;
+    var themes = myObj[0].themes;
+    var id = myObj[0].id;
+    var literary_genres = myObj[0].literary_genres;
+    var abstract = myObj[0].abstract;
+    var fact_sheet = myObj[0].fact_sheet;
+    var picture = myObj[0].picture;
 
-    var url = '/v2/books/'+ GET["id"];
+    //$("#textito").text(literary_genres);
+    newListElement(name, abstract, picture, literary_genres, themes, fact_sheet);
+    addAuthor(id);
+    addSimilar(id);
 
-    //$("#textito").text(url);
-
-    var xhttp = createCORSRequest('GET', url);
-    if (!xhttp) {
-        throw new Error('CORS not supported');
-    }
-
-    xhttp.onload = function() {
-      
-      var text = xhttp.responseText;
-      //$("#response").text(text);
-
-      var myJSON = text;
-      var myObj = JSON.parse(myJSON);
-
-      var name =myObj[0].name;
-      var themes = myObj[0].themes;
-      var id = myObj[0].id;
-      var literary_genres = myObj[0].literary_genres;
-      var abstract = myObj[0].abstract;
-      var fact_sheet = myObj[0].fact_sheet;
-      var picture = myObj[0].picture;
-
-      //$("#textito").text(literary_genres);
-      newListElement(name, abstract, picture, literary_genres, themes, fact_sheet);
-      addAuthor(id);
-      addSimilar(id);
-    
   };
 
-    xhttp.send();
+  xhttp.send();
+
+
+  //Definition of the button events
+  $("#reserveButton").click(function(){
+    
+    var loadFunction = function(){
+      $("#reserveButton").value = "Reserve Done"
+    };
+
+    reserveBook(bookID,loadFunction);
+  });
 
 });

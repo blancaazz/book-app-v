@@ -25,26 +25,88 @@ function createCORSRequest(method, url) {
 
 }
 
+function deleteBook(bookId){
+  var request = "bookId="+bookId;
+
+  var url = '/v2/user/deleteReservedBook';
+
+  xhttp = createCORSRequest('POST', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhttp.onload = function() {
+    printElements();
+  };
+
+  xhttp.send(request);
+}
+
+function printElements(){
+  
+  $("#divBooks").html("");
+
+  console.log("Button clicked");
+
+  var url = '/v2/user/getShoppingCart';
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+    
+    var text = xhttp.responseText;
+    $("#response").text(xhttp.getAllResponseHeaders());
+
+    // $("#query").text(text);
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+    $("#query").text(myObj.length);
+
+    for(var i =0; i<myObj.length;i++){
+      var name =myObj[i].name;
+      var themes = myObj[i].themes;
+      var id = myObj[i].id;
+      newListElement(name,themes,"WW", id);
+    }
+
+    $(".deleteButton").click(function(){
+      console.log("Delete button pressed: "+this.id);
+      deleteBook(this.id);    
+    });
+  };
+
+  xhttp.send();
+}
+
+
 function newListElement(iTitle,iData1,image, id) {
 
   var container = document.createElement("div");
   var divRow = document.createElement("div");
   var divLeftCol  = document.createElement("div");
   var divRightCol  = document.createElement("div");
+  var divButtons = document.createElement("div");
 
   var title = document.createElement("h3");
   var textTitle = document.createTextNode(iTitle);
-  
+
   var data1 = document.createElement("p");
   var textData1 = document.createTextNode(iData1);
   
-  /*probanding*/
-
   var url = document.createElement("a");
   var textUrl = document.createTextNode("Leer mas");
-  url.appendChild(textUrl);
   url.href = 'book.html?id=' +  id;
-   
+
+  var deleteButton = document.createElement("button");
+  // var idDeleteButton = document.createTextNode(id);
+  var textDeleteButton = document.createTextNode("Delete Reservation");
+  deleteButton.id = id;
+
   var img = document.createElement("img");
   img.src = "assets/img/portfolio/4-thumbnail.jpg";
 
@@ -52,18 +114,22 @@ function newListElement(iTitle,iData1,image, id) {
   divRow.className = "row";
   divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
   divRightCol.className = "col-lg-8 col-md-4 col-sm-12";
+  divButtons.className = "row";
   title.className = "feature-title";
   img.className = "img-fluid";
+  deleteButton.className = "deleteButton"
 
   title.appendChild(textTitle);
-
   data1.appendChild(textData1);
+  url.appendChild(textUrl);
+  deleteButton.appendChild(textDeleteButton);
 
-  data1.appendChild(url);
+  divButtons.appendChild(url);
+  divButtons.appendChild(deleteButton);
 
   divRightCol.appendChild(title);
   divRightCol.appendChild(data1);
-
+  divRightCol.appendChild(divButtons);
   divLeftCol.appendChild(img);
 
   divRow.appendChild(divLeftCol);
@@ -79,36 +145,9 @@ function newListElement(iTitle,iData1,image, id) {
 $(document).ready(function(){
     
 
-  $("button").click(function(){
+  $("#my_button").click(function(){
         
-    console.log("Button clicked");
-
-    var url = '/v2/user/getShoppingCart';
-
-    var xhttp = createCORSRequest('GET', url);
-    if (!xhttp) {
-        throw new Error('CORS not supported');
-    }
-
-    xhttp.onload = function() {
-      
-      var text = xhttp.responseText;
-      $("#response").text(xhttp.getAllResponseHeaders());
-
-      // $("#query").text(text);
-      var myJSON = text;
-      var myObj = JSON.parse(myJSON);
-      $("#query").text(myObj.length);
-
-      for(var i =0; i<myObj.length;i++){
-        var name =myObj[i].name;
-        var themes = myObj[i].themes;
-        var id = myObj[i].id;
-        newListElement(name,themes,"WW", id);
-      }
-    };
-
-    xhttp.send();
+    printElements();
 
   });
 
