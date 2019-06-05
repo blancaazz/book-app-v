@@ -25,6 +25,53 @@ function createCORSRequest(method, url) {
 
 }
 
+//FUNCTIONNSS DE LA NAVBARRRADEPAN
+
+
+function addListTheme(name){
+  $("#textito").text(name);
+  var item = document.createElement("li");
+  var theme = document.createElement("a");
+  var textTheme = document.createTextNode(name);
+
+  theme.href = "themes.html?name="+ name;
+
+  theme.appendChild(textTheme);
+  item.appendChild(theme);
+  document.getElementById("themes_dropdown").appendChild(item);
+
+
+}
+
+function addThemes(){
+  var url = '/v2/themes/getThemes';
+
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+      
+    var text = xhttp.responseText;
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+
+  //tener en cuenta que puede ser más de un autor(a)
+    for(var i =0; i<myObj.length;i++){
+      var theme = myObj[i].name;
+     //$("#textito").text(theme);
+      addListTheme(theme);
+    }
+  }
+
+  xhttp.send();
+}
+
+//FIN NAVBAaAAAAr
+
 
 //función que pone el titulito, imagen y las cosillas propias de la base de datos del libro
 
@@ -210,7 +257,7 @@ function addListSimilar(id, name, picture, numero){
   
   }
   
-  $("#textito").text(numero);
+  //$("#textito").text(numero);
 
 }
 
@@ -248,6 +295,10 @@ function addSimilar(id_book){
   xhttp.send();
 
 }
+
+
+
+
 
 
 //función pa poner los elementos html y la info:
@@ -302,6 +353,11 @@ function AddInfoAuthor(id, name, picture, bio){
 
 
 $(document).ready(function(){
+
+  //pa la navbar
+
+  addThemes();
+  addGenres();
 
 	var GET = {};
 	var query = window.location.search.substring(1).split("&");
