@@ -1,14 +1,57 @@
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+
+  if ("withCredentials" in xhr) {
+
+    // Check if the XMLHttpRequest object has a "withCredentials" property.
+    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    xhr.open(method, url, true);
+
+  } else if (typeof XDomainRequest != "undefined") {
+
+    // Otherwise, check if XDomainRequest.
+    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+
+  } else {
+
+    // Otherwise, CORS is not supported by the browser.
+    xhr = null;
+
+  }
+  
+  return xhr;
+
+}
+
+function checkLog(returnFuntion){
+
+  var url = '/v2/user/getUserName';
+
+  xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+    returnFuntion();
+  };
+
+  xhttp.send();
+}
+
+
+
 function addListTheme(name){
-  $("#textito").text(name);
-  var item = document.createElement("li");
   var theme = document.createElement("a");
   var textTheme = document.createTextNode(name);
 
   theme.href = "themes.html?name="+ name;
+  theme.className = "dropdown-item";
 
   theme.appendChild(textTheme);
-  item.appendChild(theme);
-  document.getElementById("themes_dropdown").appendChild(item);
+  document.getElementById("themes_dropdown").appendChild(theme);
 
 
 }
@@ -42,18 +85,16 @@ function addThemes(){
 
 
 function addListGenre(name){
-  $("#textito").text(name);
-  var item = document.createElement("li");
+  console.log(name);
   var genre = document.createElement("a");
   var textGenre = document.createTextNode(name);
 
+
   genre.href = "genres.html?name="+ name;
+  genre.className = "dropdown-item";
 
   genre.appendChild(textGenre);
-  item.appendChild(genre);
-  document.getElementById("genres_dropdown").appendChild(item);
-
-
+  document.getElementById("genres_dropdown").appendChild(genre);
 }
 
 function addGenres(){
@@ -82,3 +123,29 @@ function addGenres(){
 
   xhttp.send();
 }
+
+
+
+
+function addUserArea(){
+  let returnFuntion = function(){
+    var response = xhttp.responseText;
+    if (xhttp.status==200){
+      var html = 
+      '<li class="nav-item"><a class="nav-link" href="/shoppingcart.html">Welcome '+response+'</a></li>';
+      $("#userArea").html(html);
+    }else{
+      var html = 
+      '<li class="nav-item"><a class="nav-link" href="/login.html">Login</a></li>';
+      $("#userArea").html(html);
+    }
+    console.log(response);
+  }
+  checkLog(returnFuntion);
+}
+
+$(document).ready(function(){  
+  addThemes();
+  addGenres();
+  addUserArea();
+});

@@ -38,26 +38,8 @@ exports.userLoginPOST = function(username,password) {
     }).catch(err=>{
       console.log("Wrong user");
       reject("Wrong user");
-    });
-
-  
+    });  
   });
-  
-  // return sqlDb("users")
-  // .where('name_user', '=', username)
-  // .then(result => {
-  //   console.log(result);
-  //   if(result[0].password == password){
-  //     console.log("user");
-  //     return(result[0].id);
-  //   }else{
-  //     console.log("Wrong password");
-  //     return(Error("Wrong Password"));
-  //   }
-  // });
-
-  
- 
 }
 
 
@@ -98,13 +80,8 @@ exports.getUserName = function(userId) {
   return sqlDb("users")
   .where('id', '=', userId)
   .then(result => {
-    console.log(result[0].name_user),
-    resolve(result[0].name_user);
-    return result[0].name_user;
-    
-  }).catch(function(){
-    
-    reject("Wrong Id");
+    console.log(result[0].name_user);
+    return result[0].name_user;    
   });
 
 }

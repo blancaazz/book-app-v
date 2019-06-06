@@ -1,45 +1,117 @@
 /* Remove the navbar's default rounded borders and increase the bottom margin */ 
 .navbar {
-    margin-bottom: 50px;
-    border-radius: 0;
-  }
-      
+  margin-bottom: 50px;
+  border-radius: 0;
+}
+    
 /* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
-    margin-bottom: 0;
-    background-color: blueviolet;
-  }
-     
+  margin-bottom: 0;
+  background-color: blueviolet;
+}
+    
 /* Add a gray background color and some padding to the footer */
 /*
-  footer {
-    background-color: #f2f2f2;
-    padding: 25px;
-  }
-  */
-  ul#genres {
-    list-style : none;
-    
-  }
+footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}
+*/
+ul#genres {
+  list-style : none;
+  
+}
 
 /*
-  ul#genres li {
-    display: inline-block; 
-    color : blueviolet;
-    padding : 10px 15px 10px 0px;
-  } 
+ul#genres li {
+  display: inline-block; 
+  color : blueviolet;
+  padding : 10px 15px 10px 0px;
+} 
 
-  ul#themes li{
-    display: inline-block; 
-    color : blue;
-    padding : 10px 15px 10px 0px;
-  }
-  
+ul#themes li{
+  display: inline-block; 
+  color : blue;
+  padding : 10px 15px 10px 0px;
+}
+
 */
-  
 
-  #carousell{
-    display: inline-block;
-    color : green;
-  }
+
+#carousell{
+  display: inline-block;
+  color : green;
+}
+
+
+
+
+
+
+
+
+body {
+  padding: 0;
+  margin: 0;
+  background: #f2f6e9;
+}
+
+.description {
+  left: 15%;
+  right: 15%;
+  top: 15%;
+  text-align: center;
+}
+
+.description button {
+  border:1px solid #6ab446;
+  background:#6ab446;
+  border-radius: 0;
+  color:#fff;
+}
+
+.description button:hover {
+  border:1px solid #fff;
+  background:#fff;
+  color:#000;
+}
+
+
+
+.features {
+  margin: 4em auto;
+  padding: 1em;
+  position: relative;
+}
+.feature-title {
+  color: #333;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.features img {
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
   
+}
+
+
+
+#listButtons { 
+  text-align: end; 
+  align-items: end;  
+  margin-left: 10%;
+  margin-right: 10%;
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right:0;
+}
+
+#listButtons button{     
+  margin-left: 5%;
+  
+}

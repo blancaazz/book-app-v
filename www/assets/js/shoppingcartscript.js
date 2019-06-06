@@ -1,3 +1,11 @@
+// import {addThemes} from "assets/js/navbar.js";
+// import {addGenres} from "assets/js/navbar.js";
+// let { addThemes } = require("assets/js/navbar.js");
+// let { addGenres } = require("assets/js/navbar.js");
+
+//import './navBar.js';
+//import * as lib from './navBar.js';
+
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
 
@@ -25,6 +33,7 @@ function createCORSRequest(method, url) {
 
 }
 
+
 function deleteBook(bookId){
   var request = "bookId="+bookId;
 
@@ -44,6 +53,7 @@ function deleteBook(bookId){
   xhttp.send(request);
 }
 
+
 function printElements(){
   
   $("#divBooks").html("");
@@ -60,18 +70,19 @@ function printElements(){
   xhttp.onload = function() {
     
     var text = xhttp.responseText;
-    $("#response").text(xhttp.getAllResponseHeaders());
+    //$("#response").text(xhttp.getAllResponseHeaders());
 
     // $("#query").text(text);
     var myJSON = text;
     var myObj = JSON.parse(myJSON);
-    $("#query").text(myObj.length);
+    //$("#query").text(myObj.length);
 
     for(var i =0; i<myObj.length;i++){
       var name =myObj[i].name;
-      var themes = myObj[i].themes;
+      var themes = myObj[i].abstract;
       var id = myObj[i].id;
-      newListElement(name,themes,"WW", id);
+      var img = myObj[i].picture;
+      newListElement(name,themes,img, id);
     }
 
     $(".deleteButton").click(function(){
@@ -108,13 +119,14 @@ function newListElement(iTitle,iData1,image, id) {
   deleteButton.id = id;
 
   var img = document.createElement("img");
-  img.src = "assets/img/portfolio/4-thumbnail.jpg";
+  img.src = image;
 
   container.className="container features";
   divRow.className = "row";
   divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
   divRightCol.className = "col-lg-8 col-md-4 col-sm-12";
-  divButtons.className = "row";
+  //divButtons.className = "row";
+  divButtons.id = "listButtons";
   title.className = "feature-title";
   img.className = "img-fluid";
   deleteButton.className = "deleteButton"
@@ -143,12 +155,7 @@ function newListElement(iTitle,iData1,image, id) {
 
 
 $(document).ready(function(){
-    
-
-  $("#my_button").click(function(){
-        
-    printElements();
-
-  });
+     
+  printElements();
 
 });

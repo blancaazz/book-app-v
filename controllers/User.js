@@ -106,13 +106,13 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 
 module.exports.getUserName = function getUserName (req, res, next) {
-  console.log("Getting name of: "+ req.session.name);
   User.getUserName(req.session.name)
     .then(function (response) {
+      console.log("Username: "+ response);
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,404);
     });
 };
 
@@ -125,8 +125,9 @@ module.exports.userReserveBook = function userReserveBook (req, res, next) {
     .then(function (response) {
       utils.writeJson(res, response);
     })
-    .catch(function (response) {
-      utils.writeJson(res, response,404);
+    .catch(err => {
+      console.log(err);
+      utils.writeJson(res, err,404);
     });
 };
 
