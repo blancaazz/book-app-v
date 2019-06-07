@@ -1,5 +1,5 @@
 
-export function createCORSRequest(method, url) {
+function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
 
     if ("withCredentials" in xhr) {
@@ -26,7 +26,7 @@ export function createCORSRequest(method, url) {
 
 }
 
-export function logoutFunc(returnFuntion){
+function logoutFunc(returnFuntion){
 
     var url = '/v2/user/logout';
 
