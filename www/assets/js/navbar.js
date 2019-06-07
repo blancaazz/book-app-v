@@ -128,19 +128,24 @@ function addGenres(){
 
 
 function addUserArea(){
+  
   let returnFuntion = function(){
     var response = xhttp.responseText;
     if (xhttp.status==200){
       var html = 
-      '<li class="nav-item"><a class="nav-link" href="/shoppingcart.html">Welcome '+response+'</a></li>';
+      '<li class="nav-item"><a class="nav-link" href="/shoppingcart.html">Welcome '+ response +'</a></li>' +
+      '<li class="nav-item"><a class="nav-link" href="/logout.html">logout</a></li>';
       $("#userArea").html(html);
     }else{
       var html = 
-      '<li class="nav-item"><a class="nav-link" href="/login.html">Login</a></li>';
+      '<li class="nav-item"><a class="nav-link" href="/login.html">Login</a></li>'+
+      '<li class="nav-item"><a class="nav-link" href="/regiter.html">Register</a></li>';
       $("#userArea").html(html);
     }
     console.log(response);
   }
+
+
   checkLog(returnFuntion);
 }
 
