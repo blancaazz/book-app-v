@@ -56,7 +56,8 @@ function printElementsGroup(group_name){
       var themes = myObj[i].abstract;
       var id = myObj[i].id;
       var img = myObj[i].picture;
-      newListElement(name,themes,img,id, group_name);
+      var url = "book.html?id=" +  id
+      newListElement(name,themes,img,url, group_name);
     }
 
   };
@@ -65,7 +66,7 @@ function printElementsGroup(group_name){
 }
 
 
-function newListElement(iTitle,iData1,image, id, group_name) {
+function newListElement(iTitle,iData1,image, id_url, group_name) {
 
   var container = document.createElement("div");
   var divRow = document.createElement("div");
@@ -81,8 +82,8 @@ function newListElement(iTitle,iData1,image, id, group_name) {
   
   var url = document.createElement("a");
   var textUrl = document.createTextNode("Leer mas");
-  url.href = 'book.html?id=' +  id;
-
+  //url.href = 'book.html?id=' +  id;
+  url.href = id_url;
 
   var img = document.createElement("img");
   img.src = image;

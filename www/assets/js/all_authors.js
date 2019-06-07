@@ -53,7 +53,8 @@ $(document).ready(function(){
              var bio = myObj[i].bio;
              var picture = myObj[i].picture;
              var id = myObj[i].id;
-             newListElement(name, bio, picture, id, "AllAuthors");
+             var url = "author.html?id=" +  id
+             newListElement(name, bio, picture, url, "AllAuthors");
            }
          };
  

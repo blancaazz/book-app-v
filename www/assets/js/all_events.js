@@ -53,7 +53,8 @@ $(document).ready(function(){
              var place = myObj[i].place;
              var date = myObj[i].date;
              var id = myObj[i].id;
-             newListElement(name,place, "", id, "AllEvents");
+             var url = "event.html?id=" +  id
+             newListElement(name,place, "", url, "AllEvents");
            }
          };
  
