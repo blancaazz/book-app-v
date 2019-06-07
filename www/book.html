@@ -19,6 +19,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
 
   <script src="assets/js/bookscript.js" type="text/javascript"></script>
+  
   <script src="assets/js/navbar.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/book.css">
 
@@ -26,58 +27,78 @@
 <body>
 
 
-  <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR -->
 
-  <div class="jumbotron">
-    <div class="container text-center">
-        <h1>Books store</h1>      
-        <p>All kind of books hehe</p>
-    </div>
+    <div class="jumbotron">
+      <div class="container text-center">
+          <h1>Books store</h1>      
+          <p>All kind of books hehe</p>
+      </div>
   </div>  
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <a class="navbar-brand" href="/visor.html">HOME</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+              <a class="nav-link" href="/favourites.html">Recomended <span class="sr-only">(current)</span></a>
+              </li>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/visor.html">HOME</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Recomended <span class="sr-only">(current)</span></a>
-            </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="/best_sellers.html">Best Sellers <span class="sr-only">(current)</span></a>
+              </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    By Themes
-                </a>
-                <div id = "themes_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                </div>
-            </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      By Themes
+                  </a>
+                  <div id = "themes_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  </div>
+              </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    By Literary Genres
-                </a>
-                <div id = "genres_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                </div>
-            </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      By Literary Genres
+                  </a>
+                  <div id = "genres_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  </div>
+              </li>
 
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#">More</a>
-            </li>
-            
-        </ul>
-        
-        <ul class="navbar-nav justify-content-between" id="userArea">
+              <li class="nav-item dropdown ">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      More
+                  </a>
+                  <div  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class = "dropdown-item"; href="/visor.html">All books</a>
+                      <a class = "dropdown-item"; href="/visor.html">All Authors</a>
+                      <a class = "dropdown-item"; href="/visor.html">All Events</a>                        
+                  </div>               
+              </li>
 
-        </ul>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      TheBookShop
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class = "dropdown-item"; href="/ordering_info.html">Ordering Info</a>
+                      <a class = "dropdown-item"; href="/contact_us.html">Contact Us</a>
+                  </div>
+              </li>
+              
+          </ul>
+          
+          <ul class="navbar-nav justify-content-between" id="userArea">
 
+          </ul>
 
-    </div>
+      </div>
   </nav>
 
-  <!-- END NAVIGATION BAR -->
 
+  <!-- END NAVIGATION BAR -->
 
 
 <div class="container-fluid">
