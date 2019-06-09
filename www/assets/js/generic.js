@@ -30,7 +30,7 @@ function createCORSRequest(method, url) {
 
 function printElementsGroup(group_name){
   
-  $("#divBooks").html("");
+  //$("#divBooks").html("");
 
   console.log("Button clicked");
 
