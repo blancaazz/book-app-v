@@ -100,89 +100,72 @@
 
   <!-- END NAVIGATION BAR -->
 
+  <div class="description">
 
-<div class="container-fluid">
-    <div class = "row">
-        <div class = "col-sm-4">
-          <div id="image"> 
+    <div class="content-back-image">
+      <div class="container-fluid backButton">
+        <a class="backButton">Back</a>
+      </div>
+      <div class="container-fluid ">
+          <div class = "row">
+              <div class = "col-sm-4">
+                <div id="image"> 
+                </div>
+                <p id = "textito"></p>
+              </div>
+              <div class = "col-sm-6">
+                <div id = "description"></div>
+                <div id = "author_book"></div>
+                <div id = "abstract"></div>
+                <ul id = "genres" class = "list-group list-group-horizontal"></ul>
+                <p></p>
+                <ul id = "themes" class = "list-group list-group-horizontal"></ul>
+              </div>
+
           </div>
-          <p id = "textito"></p>
-        </div>
-        <div class = "col-sm-4">
-          <div id = "description"></div>
-          <div id = "author_book"></div>
-          <ul id = "genres" class = "list-group list-group-horizontal"></ul>
-          <ul id = "themes" class = "list-group list-group-horizontal"></ul>
-          <div id = "abstract"></div>
-        </div>
-        <div class = "col-sm-4">
-          <p id = "cesta">cestita</p>
+      </div>
 
-          <button id = "reserveButton">Reserve this Book</button>
+      <button id = "reserveButton">Reserve this Book</button>
 
-
-          <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">First item</li>
-            <li class="list-group-item">Second item</li>
-            <li class="list-group-item">Third item</li>
-            <li class="list-group-item">Fourth item</li>
-          </ul> 
-        </div>
     </div>
-</div>
 
 
-<hr>
+    <hr>
 
-<div id="carouselSimilar" class="carousel slide" data-ride="carousel">
-  <div id ="carouselSimilarInner" class="carousel-inner">
+    <div id="carouselSimilar" class="carousel slide text-center" data-ride="carousel">
+      <div id ="carouselSimilarInner" class="carousel-inner">
 
-    
+        
+      </div>
+
+      <a class="carousel-control-prev" href="#carouselSimilar" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselSimilar" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+
+
+
+    <hr>
+
+
+    <div class="content-back-image">
+        <div class="container-fluid">
+            <div id = "author"></div>
+            <div id = "author_card" >
+            </div>
+          </div>
+    </div> 
+
+    <div id = "fact_sheet"></div>
+
   </div>
-
-  <a class="carousel-control-prev" href="#carouselSimilar" role="button" data-slide="prev">
-   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselSimilar" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-
-</div>
-
-
-
-<hr>
-
-<div class="container-fluid">
-  <div class = "row">
-    <div class = "col-sm-3">
-        <div id = "author"></div>
-        <div id = "author_card" class="card">
-        </div>
-    </div>
-    <div class = "col-sm-9">
-        <div id = "fact_sheet"></div>
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="assets/img/portfolio/4-thumbnail.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
+  
 
 
 </body>

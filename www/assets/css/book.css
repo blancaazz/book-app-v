@@ -1,6 +1,6 @@
 /* Remove the navbar's default rounded borders and increase the bottom margin */ 
 .navbar {
-  margin-bottom: 50px;
+  margin-bottom: 0;
   border-radius: 0;
 
 }
@@ -51,10 +51,22 @@ ul#themes li{
   display: inline-block;
   color : green;
 }
+.carousel-inner {
+
+  margin: auto;
+  text-align: center;
+  align-items: center;  
+}
 
 
+.list-group {
+  color:rgb(0, 0, 0);
+}
 
-
+.backButton{
+  text-align: left;
+  width: 90%;
+}
 
 
 
@@ -107,6 +119,20 @@ body {
   
 }
 
+.content-back-image {
+  background-image: url(/assets/img/header-bg.jpg) ;
+
+  background-size: cover;
+  display: block;
+
+  left: 0;
+  position: relative;
+  right: 0;
+
+  padding: 70px 0;
+  color:#FFF;
+  text-align: center;
+}
 
 
 #listButtons { 

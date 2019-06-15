@@ -36,3 +36,14 @@ module.exports.geteventById = function geteventById (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.getEventsBooks = function getEventsBooks (req, res, next) {
+  var eventId = req.swagger.params['eventId'].value;
+  Event.getEventsBooks(eventId)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};

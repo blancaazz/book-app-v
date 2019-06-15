@@ -26,6 +26,76 @@ function createCORSRequest(method, url) {
 
 }
 
+function getEventById(eventId,returnFuntion){
+
+  var url = '/v2/events/'+eventId;
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {    
+    returnFuntion(xhttp.responseText);
+  }
+
+  xhttp.send();
+}
+
+
+function getEventBooks(eventId,returnFuntion){
+
+  var url = '/v2/events/getBooks/'+eventId;
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {    
+    returnFuntion(xhttp.responseText);
+  }
+
+  xhttp.send();
+}
+
+
+function getBookByID(bookID, returnFuntion){
+
+  var url = '/v2/books/'+ bookID;
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+    
+    var text = xhttp.responseText;
+
+    returnFuntion(text);
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+
+    var name =myObj[0].name;
+    var themes = myObj[0].themes;
+    var id = myObj[0].id;
+    var literary_genres = myObj[0].literary_genres;
+    var abstract = myObj[0].abstract;
+    var fact_sheet = myObj[0].fact_sheet;
+    var picture = myObj[0].picture;
+
+    newListElement(name, abstract, picture, literary_genres, themes, fact_sheet);
+    addAuthor(id);
+    addSimilar(id);
+
+  };
+
+  xhttp.send();  
+}
+
+
 function logoutFunc(returnFuntion){
 
     var url = '/v2/user/logout';

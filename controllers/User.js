@@ -37,7 +37,7 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
       console.log("Error logging: "+err);
 
       try {
-        utils.writeJson(res);
+        utils.writeJson(res, null,404);
       }
       catch(err) {
         console.log("Try error: "+err);

@@ -80,39 +80,34 @@ function newListElement(iTitle,iData1,image, id) {
 
 $(document).ready(function(){
     
+  console.log("Button clicked");
 
-   // $("button").click(function(){
-        
-        console.log("Button clicked");
+  var url = '/v2/books';
 
-        var url = '/v2/books';
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
 
-        var xhttp = createCORSRequest('GET', url);
-        if (!xhttp) {
-            throw new Error('CORS not supported');
-        }
+  xhttp.onload = function() {
+    
+    var text = xhttp.responseText;
+    
 
-        xhttp.onload = function() {
-          
-          var text = xhttp.responseText;
-          //$("#response").text(text);
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+    $("#query").text(myObj.length);
 
-          var myJSON = text;
-          var myObj = JSON.parse(myJSON);
-          $("#query").text(myObj.length);
+    for(var i =0; i<myObj.length;i++){
+      var name =myObj[i].name;
+      var themes = myObj[i].themes;
+      var id = myObj[i].id;
+      var img = myObj[i].picture;
+      newListElement(name,themes,img, id);
+    }
+  };
 
-          for(var i =0; i<myObj.length;i++){
-            var name =myObj[i].name;
-            var themes = myObj[i].themes;
-            var id = myObj[i].id;
-            var img = myObj[i].picture;
-            newListElement(name,themes,img, id);
-          }
-        };
-
-        xhttp.send();
-
-  //  });
+  xhttp.send();
 
 });
 

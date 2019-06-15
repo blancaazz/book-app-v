@@ -60,4 +60,21 @@ exports.geteventById = function(eventId) {
   })
 }
 
+
+/**
+ * Get books of event
+ * Returns a book
+ *
+ * eventId Long ID of event to return
+ * returns List
+ **/
+exports.getEventsBooks = function(eventId) {
+  var subquery = sqlDb("presented").where('id_event', '=', eventId).select('id_book');
+
+  return sqlDb("books")
+    .where('id', 'in', subquery)
+    .then (result => {
+      return result;
+    })
+}
   
