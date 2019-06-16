@@ -10,7 +10,7 @@ let { userDbSetup } = require ("./UserService");
 let errorTables;
 
 
-/*
+
  let sqlDb = knex({
    client: 'pg',
    version: '7.2',
@@ -23,7 +23,7 @@ let errorTables;
      port: 5432
   }
  });
-*/
+
 
   // let sqlDb = knex({
   //   client: 'pg',
@@ -37,16 +37,16 @@ let errorTables;
   // });
 
  
-let sqlDb = knex({
-  client: 'pg',
-  version: '7.2',
-  connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'vegagc',
-    database : 'mylocaldb'
-  }
-});
+// let sqlDb = knex({
+//   client: 'pg',
+//   version: '7.2',
+//   connection: {
+//     host : '127.0.0.1',
+//     user : 'postgres',
+//     password : 'vegagc',
+//     database : 'mylocaldb'
+//   }
+// });
 
 
 
