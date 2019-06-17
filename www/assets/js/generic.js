@@ -88,12 +88,13 @@ function newListElement(iTitle,iData1,image, id_url, group_name) {
   var img = document.createElement("img");
   img.src = image;
 
-  container.className="container features";
+  container.className="container features listItem";
   divRow.className = "row";
   divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
-  divRightCol.className = "col-lg-8 col-md-4 col-sm-12";
+  divRightCol.className = "col-lg-8 col-md-8 col-sm-12";
   //divButtons.className = "row";
   divButtons.id = "listButtons";
+  data1.className = "listMainData";
   title.className = "feature-title";
   img.className = "img-fluid";
 

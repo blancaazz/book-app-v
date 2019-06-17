@@ -25,53 +25,6 @@ function createCORSRequest(method, url) {
 
 }
 
-//FUNCTIONNSS DE LA NAVBARRRADEPAN
-
-
-function addListTheme(name){
-  $("#textito").text(name);
-  var item = document.createElement("li");
-  var theme = document.createElement("a");
-  var textTheme = document.createTextNode(name);
-
-  theme.href = "themes.html?name="+ name;
-
-  theme.appendChild(textTheme);
-  item.appendChild(theme);
-  document.getElementById("themes_dropdown").appendChild(item);
-
-
-}
-
-function addThemes(){
-  var url = '/v2/themes/getThemes';
-
-
-  var xhttp = createCORSRequest('GET', url);
-  if (!xhttp) {
-      throw new Error('CORS not supported');
-  }
-
-  xhttp.onload = function() {
-      
-    var text = xhttp.responseText;
-
-    var myJSON = text;
-    var myObj = JSON.parse(myJSON);
-
-  //tener en cuenta que puede ser más de un autor(a)
-    for(var i =0; i<myObj.length;i++){
-      var theme = myObj[i].name;
-     //$("#textito").text(theme);
-      addListTheme(theme);
-    }
-  }
-
-  xhttp.send();
-}
-
-//FIN NAVBAaAAAAr
-
 function reserveBook(bookId,loadFunction){
   var request = "bookId="+bookId;
 
@@ -96,39 +49,25 @@ function reserveBook(bookId,loadFunction){
 
 function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
   
-  //imagen
+    //imagen
 
     var img = document.createElement("img");
     img.className = "img-fluid";
     img.src = image;
     document.getElementById("image").appendChild(img);
    
-  //título
+    //título
     var title = document.createElement("h1");
     var textTitle = document.createTextNode(iTitle);
     title.appendChild(textTitle);
     document.getElementById("description").appendChild(title);
 
 
-  //lista de géneros      
-    /*
-    var genresH = document.createElement("h5");
-    var genresText = "";
-    for (var i= 0; i < genres.length; i++){
-      genresText += genres[i] + "   ,   ";
-    }
-    //$("#textito").text(genresText);
-
-    var textGenres = document.createTextNode(genresText);
-    genresH.appendChild(textGenres);
-    document.getElementById("genres").appendChild(genresH);
-    */
-    //var genresC = document.createElement("div");
-
+    //lista de géneros      
     for(var i = 0; i < genres.length; i++){
       var genresC = document.createElement("li");
       genresC.className ="list-group-item"
-      var genresH = document.createElement("p");
+      var genresH = document.createElement("label");
       var textGenres = document.createTextNode(genres[i]);
       genresH.appendChild(textGenres);
       genresC.appendChild(genresH);
@@ -137,18 +76,19 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
 
 
     //en plan los temas y géneros faltaría hacerlos más bonito metiendolos
-  //en una listilla guapetona
-  //lista de temas
+    //en una listilla guapetona
+    
+    //lista de temas
     for(var i = 0; i < themes.length; i++){
       var themesC = document.createElement("li");
       themesC.className = "list-group-item";
-      var themesH = document.createElement("p");
+      var themesH = document.createElement("label");
       var textThemes = document.createTextNode(themes[i]);
       themesH.appendChild(textThemes);
       themesC.appendChild(themesH);
       document.getElementById("themes").appendChild(themesC);
     }
-    //$("#textito").text(themesText);
+    
 
 
     //abstract
@@ -164,18 +104,9 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
     factSheet.appendChild(factSheetText);
     document.getElementById("fact_sheet").appendChild(factSheet);
    
-  }
+}
 
   
-  //funsión de prueba
-function addElement(){
-  var newDir = document.createElement("div");
-  var newContent = document.createTextNode("holiii");
-  newDir.appendChild(newContent);
-
-  var currentDiv = document.getElementById("div1");
-  currentDiv.appendChild(newDir);
-}
 
  
 
@@ -211,7 +142,7 @@ function addAuthor(id_book){
     AddInfoAuthor(id, name, picture, bio);
 
 
-};
+  };
 
   xhttp.send();
 
@@ -220,20 +151,18 @@ function addAuthor(id_book){
 function addListSimilar(id, name, picture, numero){
   
   if((numero % 3) == 0){
-    console.log("holi")
     var container = document.createElement("div");
+
     if (numero == 0){
       container.className = "carousel-item active";
     }
     else{
       container.className = "carousel-item";
     }
-    //container.id = "carousell"
+
     var list = document.createElement("ul");
     list.className = "list-group list-group-horizontal";
     list.id = "lista" + parseInt(numero / 3);
-   // $("#textito").text(list.id);
-    //container.id = "carousel" + (numero / 3);
     var element = document.createElement("li");
     var nameH = document.createElement("h3");
     var textName = document.createTextNode(name);
@@ -241,8 +170,6 @@ function addListSimilar(id, name, picture, numero){
     var img = document.createElement("img");
     img.src = picture;
 
-   // container.appendChild(nameH);
-   // container.appendChild(img);
     element.appendChild(nameH);
     element.appendChild(img);
     list.appendChild(element);
@@ -263,10 +190,6 @@ function addListSimilar(id, name, picture, numero){
     nameH.appendChild(textName);
     var img = document.createElement("img");
     img.src = picture;
-/*
-    document.getElementById("carousell").appendChild(nameH);
-    document.getElementById("carousell").appendChild(img);
-    */
 
     element.appendChild(nameH);
     element.appendChild(img);
@@ -274,8 +197,7 @@ function addListSimilar(id, name, picture, numero){
     list.appendChild(element);
   
   }
-  
-  //$("#textito").text(numero);
+
 }
 
 function addSimilar(id_book){
@@ -369,14 +291,8 @@ function AddInfoAuthor(id, name, picture, bio){
 
 $(document).ready(function(){
 
-  //pa la navbar
-
-  addThemes();
-  addGenres();
-
-
   var bookID;
-  
+
   //Getting the ID from the URL
   var GET = {};
 	var query = window.location.search.substring(1).split("&");
@@ -390,9 +306,8 @@ $(document).ready(function(){
   //Variable with the actual book ID;
   bookID = GET["id"];
 
-  //console.log("Poniendo ready esto");
-
-  //$("#textito").text(GET["id"]);
+  //We stablish the back link
+  $(".backLink").attr("href",document.referrer);
 
   var url = '/v2/books/'+ bookID;
 

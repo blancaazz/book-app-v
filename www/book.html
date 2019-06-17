@@ -103,36 +103,46 @@
   <div class="description">
 
     <div class="content-back-image">
-      <div class="container-fluid backButton">
-        <a class="backButton">Back</a>
+      
+      <div class="container-fluid ">
+        <div class = "row">
+            <div class = "col-sm-4">
+              <a class="backLink">
+                <img class="backImg" src="/assets/img/icons/backArrow.svg"></img>
+              </a>
+            </div>
+            <div class = "col-sm-6">
+              <div id = "description"></div>
+            </div>
+          </div>
       </div>
+      <p></p>
       <div class="container-fluid ">
           <div class = "row">
-              <div class = "col-sm-4">
-                <div id="image"> 
+              <div class = "col-sm-4">                 
+                <div id="image">              
                 </div>
-                <p id = "textito"></p>
               </div>
               <div class = "col-sm-6">
-                <div id = "description"></div>
                 <div id = "author_book"></div>
                 <div id = "abstract"></div>
                 <ul id = "genres" class = "list-group list-group-horizontal"></ul>
                 <p></p>
                 <ul id = "themes" class = "list-group list-group-horizontal"></ul>
+                <button id = "reserveButton">Reserve this Book</button>
+
               </div>
 
           </div>
       </div>
 
-      <button id = "reserveButton">Reserve this Book</button>
-
+     
     </div>
 
 
     <hr>
 
-    <div id="carouselSimilar" class="carousel slide text-center" data-ride="carousel">
+    <div id="carouselSimilar" class="carousel slide" data-ride="carousel">
       <div id ="carouselSimilarInner" class="carousel-inner">
 
         
