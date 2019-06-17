@@ -20,31 +20,11 @@ ul#navBarList li{
 }
     
 /* Add a gray background color and some padding to the footer */
-/*
-footer {
-  background-color: #f2f2f2;
-  padding: 25px;
-}
-*/
+
 ul#genres {
   list-style : none;
   
 }
-
-/*
-ul#genres li {
-  display: inline-block; 
-  color : blueviolet;
-  padding : 10px 15px 10px 0px;
-} 
-
-ul#themes li{
-  display: inline-block; 
-  color : blue;
-  padding : 10px 15px 10px 0px;
-}
-
-*/
 
 
 #carousell{
@@ -58,15 +38,11 @@ ul#themes li{
   align-items: center;  
 }
 
-
 .list-group {
   color:rgb(0, 0, 0);
 }
 
-.backButton{
-  text-align: left;
-  width: 90%;
-}
+
 
 
 
@@ -95,6 +71,34 @@ body {
   border:1px solid #fff;
   background:#fff;
   color:#000;
+}
+
+
+
+.backLink a:link{
+  text-align: left;
+  width: 100%;
+  color:#FFF;
+}
+.backLink a:visited{
+  text-align: left;
+  width: 100%;
+  color:#FFF;
+}
+.backLink a:hover{
+  text-align: left;
+  width: 100%;
+  color:rgb(137, 61, 139);
+}
+.backImg{
+  height: 42px;
+  width: 42px;
+  filter: invert(100%);
+}
+.backImg:hover{
+  height: 42px;
+  width: 42px;
+  filter: invert(50%);
 }
 
 
@@ -134,6 +138,25 @@ body {
   text-align: center;
 }
 
+.content-back-image button{
+  border:1px solid #4d3b47;
+  background:#3e3f3d;
+  border-radius: 0;
+  color:#fff;
+  margin-top: 10px;
+  
+}
+
+.list-group-item{
+  max-height: 20px,
+}
+
+
+
+.listItem img{
+  width: 100%;
+  max-height: 90%;
+}
 
 #listButtons { 
   text-align: end; 
@@ -153,4 +176,85 @@ body {
 
 #flex_genres{
   color: violet;
+}
+
+
+.list-group-horizontal .list-group-item {
+  display: inline-block;
+  width:33.3%;
+  height:5%;
+ text-align:center
+}
+
+
+
+/* Large size screen */
+@media (min-width: 1000px) {
+  #listButtons { 
+    text-align: end; 
+    align-items: end;  
+    margin-left: 10%;
+    margin-right: 10%;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right:0;
+  }
+  .listMainData{
+    display:inline;
+  }
+
+  .description {
+    left: 15%;
+    right: 15%;
+    top: 15%;
+    text-align: center;
+  }
+}
+
+/* Mid Size screen */
+@media (max-width: 990px) and (min-width: 700px) {
+  #listButtons {
+    position: relative; 
+    text-align: end; 
+    align-items: end;
+    margin-top: 5px;  
+    margin-left: 10%;
+    margin-right: 10%;
+    bottom: 0%;
+
+  }
+  .listMainData{
+    display:inline;
+  }
+  .description {
+    left: 5%;
+    right: 5%;
+    top: 15%;
+    text-align: center;
+  }
+}
+
+
+/* Small Size screen */
+@media (max-width: 700px) {
+  #listButtons {
+    position: relative; 
+    text-align: end; 
+    align-items: end;
+    margin-top: 5px;  
+    margin-left: 10%;
+    margin-right: 10%;
+    bottom: 0%;
+
+  }
+  .listMainData{
+    display:none;
+  }
+  .description {
+    left: 5%;
+    right: 5%;
+    top: 15%;
+    text-align: center;
+  }
 }

@@ -53,7 +53,14 @@ $(document).ready(function(){
 
         xhttp.onload = function() {
           var text = "SEND";
-          $("#res").text(xhttp.status);
+          
+
+          if(xhttp.status == 200){
+            location.reload();
+            $("#res").text("Welcome");
+          }else{
+            $("#res").text("Wrong Data");
+          }
 
         };
 
