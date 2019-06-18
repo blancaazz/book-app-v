@@ -27,17 +27,15 @@ function createCORSRequest(method, url) {
 
 }
 
-function indexNewListElement(name, data, picture, id_url, categoria){
-    /*
-    var categoriaH = document.createElement("h3");
-    var categoriaText = document.createTextNode(categoria);
-    categoriaH.appendChild(categoriaText);
+//categoria refers to the id of the div container
+//the rest are the data to put
 
-    var lista = document.createElement("ul");
-    lista.class = "list-group list-group-horizontal";
-    */
+function indexNewListElement(name, data, picture, id_url, categoria){
+   /*
     var element = document.createElement("li");
-    element.class = "list-group-item";
+    element.className = "list-group-item"
+    idElement = "element" + aleatorio;
+    element.id =  idElement;
 
         
     var container = document.createElement("div");
@@ -87,9 +85,12 @@ function indexNewListElement(name, data, picture, id_url, categoria){
     element.appendChild(container);
 
     document.getElementById(categoria).appendChild(element);
+    */
 }
 
-
+//this function would create a list with id = genre
+//load the books of a specified genre
+//and call a function to append it to the html
 function indexPrintElements(genre){
 
   var categoriaH = document.createElement("h3");
@@ -97,10 +98,23 @@ function indexPrintElements(genre){
   categoriaH.appendChild(categoriaText);   
   document.getElementById("indexBook").appendChild(categoriaH);
 
+  var c = document.createElement("div");
+  c.className = "container-fluid contenedorr";
+  
   var lista = document.createElement("ul");
-  lista.className = "list-group list-group-horizontal";
+  lista.className = "list-group list-group-horizontal genres";
   lista.id = genre;
-  document.getElementById("indexBook").appendChild(lista);
+  //document.getElementById("indexBook").appendChild(lista);
+
+  c.appendChild(lista);
+  document.getElementById("indexBook").appendChild(c);
+  
+/*
+  var flex = document.createElement("div");
+  flex.className = "d-flex flex-row";
+  flex.id = genre;
+  document.getElementById("indexBook").appendChild(flex);
+  */
 
   var url = '/v2/genre/getBooks/' + genre;
 
@@ -126,14 +140,28 @@ function indexPrintElements(genre){
         var img = myObj[aleatorio].picture;
         var url = "book.html?id=" +  id
         aleatorio = (aleatorio + 1) % myObj.length;
-        indexNewListElement(name, themes, img, url, genre)
+
+        //create the element of the list 
+        
+        var element = document.createElement("li");
+        element.className = "list-group-item";
+        var idElement = "element" + aleatorio + genre;
+        element.id =  idElement;
+        //we append the element to the list:
+        lista.appendChild(element);
+        //call for creating a card and append it to the previous element;
+        
+        newCardElement(name, themes, img, url, idElement);
+       
     }
   };
 
   xhttp.send();
 }
 
-
+//this function creates the 4 genres (randomly)
+//inside there is a call for a function that will print 
+//the book of each genre
 function indexAddGenres(){
   var url = '/v2/genres/getGenres';
 
@@ -161,56 +189,23 @@ function indexAddGenres(){
   }
 
   xhttp.send();
-  $("#textito2").text("HOLiWI");
+
 }
 
-
-function newCardElement(name, themes, picture, url, id){
-  //PARTE de crear los elementos html
-
+//creates a col and append it to the row
+//then call the generic function newCardElement to creates a new card
+function newCardElementIndex(name, themes, picture, url, id, i){
   var supercontainer = document.createElement("div");
   supercontainer.className = "col-sm-4"
+  var newId = "col" + id + i;
+  supercontainer.id = newId;
 
-  var bodycontainer = document.createElement("div");
-  bodycontainer.className = "card";
-
-  var container = document.createElement("div");
-  container.className = "card-body";
-
-  //imagen
-  var img = document.createElement("img");
-  img.src = picture;
-  img.className = "card-img-top";
-
-  //name del autor
-  var nameH = document.createElement("h3");
-  nameH.className="card-title"; 
-  var nameText = document.createTextNode(name);
-  nameH.appendChild(nameText);  
-  //bio
-  var dataP = document.createElement("p");
-  dataP.className = "card-text";
-  var dataText = document.createTextNode(themes);
-  dataP.appendChild(dataText);
-
-  //link a la página del autor/a
-  var aBook = document.createElement("a");
-  var aText = document.createTextNode("Go to this book");
-  aBook.className = "btn btn-primary"
-  aBook.href = url;
-  aBook.appendChild(aText);
-
-
-  container.appendChild(nameH);
-  container.appendChild(dataP);
-  container.appendChild(aBook);
-
-  bodycontainer.appendChild(img);
-  bodycontainer.appendChild(container);
-  //bodycontainer.getElementById(id).appendChild(nameHBook);
-  supercontainer.appendChild(bodycontainer);
   document.getElementById(id).appendChild(supercontainer);
+
+  //newId is the id of the element, to append the card 
+  newCardElement(name, themes, picture, url, newId);
 }
+
 
 function createRow(maxRow, id){
   for(var i = 0; i < maxRow; i++){
@@ -252,7 +247,8 @@ function booksStructure(){
       var fact_sheet = myObj[i].fact_sheet;
       var img = myObj[i].picture;
       var url = "book.html?id=" +  id;
-      newCardElement(name,themes,img,url, "booksRow" + parseInt(i / bookForRow));
+      newCardElementIndex(name, themes, img, url, "booksRow" + parseInt(i/ bookForRow), i);
+      //newCardElement(name,themes,img,url, "booksRow" + parseInt(i / bookForRow));
     }
   };
 
@@ -265,6 +261,7 @@ $(document).ready(function(){
 
     //create structure for books
     booksStructure();
+
   //this function generates 4 genres randomly, and make 4 lists for each one with a max number of books of 4 (also randomly)
     indexAddGenres();
 

@@ -118,3 +118,51 @@ function newListElement(iTitle,iData1,image, id_url, group_name) {
  
 }
 
+
+
+//function to create a new element card
+//the id makes reference to the id of the div to append it
+
+function newCardElement(name, themes, picture, url, id){
+  //PARTE de crear los elementos html
+
+  var bodycontainer = document.createElement("div");
+  bodycontainer.className = "card";
+
+  var container = document.createElement("div");
+  container.className = "card-body";
+
+  //imagen
+  var img = document.createElement("img");
+  img.src = picture;
+  img.className = "card-img-top";
+
+  //name del autor
+  var nameH = document.createElement("h3");
+  nameH.className="card-title"; 
+  var nameText = document.createTextNode(name);
+  nameH.appendChild(nameText);  
+  //bio
+  var dataP = document.createElement("p");
+  dataP.className = "card-text";
+  var dataText = document.createTextNode(themes);
+  dataP.appendChild(dataText);
+
+  //link a la página del autor/a
+  var aBook = document.createElement("a");
+  var aText = document.createTextNode("Go to this book");
+  aBook.className = "btn btn-primary"
+  aBook.href = url;
+  aBook.appendChild(aText);
+
+
+  container.appendChild(nameH);
+  container.appendChild(dataP);
+  container.appendChild(aBook);
+
+  bodycontainer.appendChild(img);
+  bodycontainer.appendChild(container);
+  //bodycontainer.getElementById(id).appendChild(nameHBook);
+  //supercontainer.appendChild(bodycontainer);
+  document.getElementById(id).appendChild(bodycontainer);
+}
