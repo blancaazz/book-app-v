@@ -142,11 +142,13 @@ function newCardElement(name, themes, picture, url, id){
   nameH.className="card-title"; 
   var nameText = document.createTextNode(name);
   nameH.appendChild(nameText);  
-  //bio
-  var dataP = document.createElement("p");
-  dataP.className = "card-text";
-  var dataText = document.createTextNode(themes);
-  dataP.appendChild(dataText);
+  //data
+  if(themes != null){
+    var dataP = document.createElement("p");
+    dataP.className = "card-text";
+    var dataText = document.createTextNode(themes);
+    dataP.appendChild(dataText);
+  }
 
   //link a la página del autor/a
   var aBook = document.createElement("a");
@@ -157,9 +159,10 @@ function newCardElement(name, themes, picture, url, id){
 
 
   container.appendChild(nameH);
-  container.appendChild(dataP);
+  if(themes != null){
+    container.appendChild(dataP);
+  }
   container.appendChild(aBook);
-
   bodycontainer.appendChild(img);
   bodycontainer.appendChild(container);
   //bodycontainer.getElementById(id).appendChild(nameHBook);
