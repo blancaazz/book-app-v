@@ -16,7 +16,13 @@ ul#navBarList li{
 /* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
   margin-bottom: 0;
-  background-color: blueviolet;
+  background-image: url(/assets/img/generic/back.jpg)
+}
+
+#title{
+  color: white;
+  font-weight: bold;
+
 }
     
 /* Add a gray background color and some padding to the footer */
@@ -257,4 +263,29 @@ body {
     top: 15%;
     text-align: center;
   }
+
+
+}
+
+#books{
+  text-align: center;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 60%;
+  border-radius: 5px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-body {
+  padding: 2px 16px;
 }

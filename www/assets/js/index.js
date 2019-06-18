@@ -165,9 +165,106 @@ function indexAddGenres(){
 }
 
 
+function newCardElement(name, themes, picture, url, id){
+  //PARTE de crear los elementos html
+
+  var supercontainer = document.createElement("div");
+  supercontainer.className = "col-sm-4"
+
+  var bodycontainer = document.createElement("div");
+  bodycontainer.className = "card";
+
+  var container = document.createElement("div");
+  container.className = "card-body";
+
+  //imagen
+  var img = document.createElement("img");
+  img.src = picture;
+  img.className = "card-img-top";
+
+  //name del autor
+  var nameH = document.createElement("h3");
+  nameH.className="card-title"; 
+  var nameText = document.createTextNode(name);
+  nameH.appendChild(nameText);  
+  //bio
+  var dataP = document.createElement("p");
+  dataP.className = "card-text";
+  var dataText = document.createTextNode(themes);
+  dataP.appendChild(dataText);
+
+  //link a la página del autor/a
+  var aBook = document.createElement("a");
+  var aText = document.createTextNode("Go to this book");
+  aBook.className = "btn btn-primary"
+  aBook.href = url;
+  aBook.appendChild(aText);
+
+
+  container.appendChild(nameH);
+  container.appendChild(dataP);
+  container.appendChild(aBook);
+
+  bodycontainer.appendChild(img);
+  bodycontainer.appendChild(container);
+  //bodycontainer.getElementById(id).appendChild(nameHBook);
+  supercontainer.appendChild(bodycontainer);
+  document.getElementById(id).appendChild(supercontainer);
+}
+
+function createRow(maxRow, id){
+  for(var i = 0; i < maxRow; i++){
+    var row = document.createElement("div");
+    row.className = "row";
+    row.id = "booksRow" + i;
+    document.getElementById(id).appendChild(row);
+  }
+
+}
+
+function booksStructure(){
+  var url = '/v2/books';
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+    
+    var text = xhttp.responseText;
+    
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+    $("#query").text(myObj.length);
+
+    var maxRow = 2;
+    var bookForRow = 3;
+    createRow(maxRow, "books");
+
+    for(var i =0; i< (maxRow * bookForRow);i++){
+      var name =myObj[i].name;
+      var themes = myObj[i].themes;
+      var id = myObj[i].id;
+      var literary_genres = myObj[i].literary_genres;
+      var abstract = myObj[i].abstract;
+      var fact_sheet = myObj[i].fact_sheet;
+      var img = myObj[i].picture;
+      var url = "book.html?id=" +  id;
+      newCardElement(name,themes,img,url, "booksRow" + parseInt(i / bookForRow));
+    }
+  };
+
+  xhttp.send();
+
+}
 
 $(document).ready(function(){
     
+
+    //create structure for books
+    booksStructure();
   //this function generates 4 genres randomly, and make 4 lists for each one with a max number of books of 4 (also randomly)
     indexAddGenres();
 
