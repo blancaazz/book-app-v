@@ -94,27 +94,34 @@ function indexNewListElement(name, data, picture, id_url, categoria){
 function indexPrintElements(genre){
 
   var categoriaH = document.createElement("h3");
+  categoriaH.className = "categoria";
+
+
   var categoriaText = document.createTextNode(genre);
   categoriaH.appendChild(categoriaText);   
-  document.getElementById("indexBook").appendChild(categoriaH);
 
-  var c = document.createElement("div");
-  c.className = "container-fluid contenedorr";
+  var categoriaA = document.createElement("a");
+  categoriaA.href = "genres.html?name=" + genre;
+  var text = document.createTextNode("Display all the books");
+  categoriaA.appendChild(text);
+  categoriaH.appendChild(categoriaA);
+
+  document.getElementById("indexBook").appendChild(categoriaH);
+/*
   
   var lista = document.createElement("ul");
   lista.className = "list-group list-group-horizontal genres";
   lista.id = genre;
   //document.getElementById("indexBook").appendChild(lista);
 
-  c.appendChild(lista);
-  document.getElementById("indexBook").appendChild(c);
-  
-/*
-  var flex = document.createElement("div");
-  flex.className = "d-flex flex-row";
-  flex.id = genre;
-  document.getElementById("indexBook").appendChild(flex);
+  document.getElementById("indexBook").appendChild(lista);
   */
+
+  var row = document.createElement("div");
+  row.className = "row rowGenre";
+  row.id = genre;
+  document.getElementById("indexBook").appendChild(row);
+  
 
   var url = '/v2/genre/getBooks/' + genre;
 
@@ -142,7 +149,7 @@ function indexPrintElements(genre){
         aleatorio = (aleatorio + 1) % myObj.length;
 
         //create the element of the list 
-        
+       /* 
         var element = document.createElement("li");
         element.className = "list-group-item";
         var idElement = "element" + aleatorio + genre;
@@ -150,8 +157,14 @@ function indexPrintElements(genre){
         //we append the element to the list:
         lista.appendChild(element);
         //call for creating a card and append it to the previous element;
-        
-        newCardElement(name, themes, img, url, idElement);
+        */
+
+        var element = document.createElement("div");
+        element.className = "col-sm-3";
+        var idElement = "element" + aleatorio + genre;
+        element.id = idElement;
+        row.appendChild(element);
+        newCardElement(name,null, img, url, idElement);
        
     }
   };
@@ -256,6 +269,7 @@ function booksStructure(){
 
 }
 
+
 $(document).ready(function(){
     
 
@@ -263,9 +277,6 @@ $(document).ready(function(){
     booksStructure();
 
   //this function generates 4 genres randomly, and make 4 lists for each one with a max number of books of 4 (also randomly)
-    indexAddGenres();
-
-    printElementsGroup("favourites");
- 
+    indexAddGenres(); 
  });
  
