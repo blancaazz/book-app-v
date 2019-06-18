@@ -47,3 +47,13 @@ module.exports.getEventsBooks = function getEventsBooks (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.getLastMonthEvents = function getLastMonthEvents (req, res, next) {
+  Event.getLastMonthEvents()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};

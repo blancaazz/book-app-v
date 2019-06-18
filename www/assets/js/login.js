@@ -69,24 +69,5 @@ $(document).ready(function(){
 
     });
 
-    $("#bLogout").click(function(){
-      
-      console.log("Button LOGOUT clicked");
-
-      var url = '/v2/user/logout';
-
-      xhttp = createCORSRequest('POST', url);
-      if (!xhttp) {
-          throw new Error('CORS not supported');
-      }
-
-      xhttp.onload = function() {
-        var text = "LOGGED OUT";
-        $("#res").text(text);
-      };
-      
-      xhttp.send();
-
-  });
 
 });

@@ -77,4 +77,57 @@ exports.getEventsBooks = function(eventId) {
       return result;
     })
 }
+
+
+/**
+ * Get all last month events
+ * Returns Events Array
+ *
+ * returns List
+ **/
+exports.getLastMonthEvents = function() {
+
+ 
+
+
+
+  return sqlDb("events")
+  .then (events => {
+    
+    var d = new Date();
+    var day = d.getDay();
+    var month = d.getMonth();
+    var year = d.getFullYear();
+  
+    if(month > 1)
+      month = month - 1;
+    else
+      month = 12;
+      year = year - 1;
+  
+    console.log(date);
+
+    console.log(events.length);
+
+    var result;
+    for(i = 0; i < events.length; i++)
+    {
+
+      var date = events[i].date;
+      var eDay = date.substring(0,1);
+      var eMonth = date.substring(2,3);
+      var eYear = date.substring(5,8);
+
+      console.log("Event: "+eDay+eMonth+eYear);
+
+      if(eYear>=year && eMonth >= month && eDay >= day){
+        console.log(events[i]);
+      }
+    }
+
+
+
+    return result;
+  })
+}
   
