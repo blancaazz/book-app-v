@@ -269,6 +269,7 @@ function booksStructure(){
 
 }
 
+
 $(document).ready(function(){
     
 
@@ -276,9 +277,6 @@ $(document).ready(function(){
     booksStructure();
 
   //this function generates 4 genres randomly, and make 4 lists for each one with a max number of books of 4 (also randomly)
-    indexAddGenres();
-
-    printElementsGroup("favourites");
- 
+    indexAddGenres(); 
  });
  

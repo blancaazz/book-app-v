@@ -335,7 +335,7 @@ body {
 
 .categoria{
   color: #343a40;
-  padding: 50px 0px 20px 20px;
+  padding: 50px 0px 30px 20px;
   font-style: oblique;
   font-size: 200%;
 }
@@ -347,6 +347,8 @@ body {
 }
 
 .rowGenre{
+  margin-left: 2%;
+  margin-right: 2%;
   background-color: #343a40;
   color: white;
 }
@@ -366,3 +368,29 @@ body {
   font-size: 90%;
 }
 
+footer{
+  background-color: #343a40;
+  margin-top: 50px;
+  text-align: center;
+}
+
+footer h4{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  
+  color: white;
+
+}
+footer a{
+  color: white;
+}
+footer li{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+footer ul{
+  margin-top: 50px;
+  margin-bottom: 100px;
+  list-style: none;
+  color: white;
+}
