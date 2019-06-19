@@ -86,7 +86,7 @@ function indexPrintElements(genre){
         aleatorio = (aleatorio + 1) % myObj.length;
 
         var element = document.createElement("div");
-        element.className = "col-sm-3";
+        element.className = "col-lg-3 col-md-4 col-sm-6";
         var idElement = "element" + aleatorio + genre;
         element.id = idElement;
         row.appendChild(element);
@@ -134,8 +134,8 @@ function indexAddGenres(){
 //creates a col and append it to the row
 //then call the generic function newCardElement to creates a new card
 function newCardElementIndex(name, themes, picture, url, id, i){
-  var supercontainer = document.createElement("div");
-  supercontainer.className = "col-sm-4"
+  var supercontainer = document.createElement("div ");
+  supercontainer.className = "col-md-4"
   var newId = "col" + id + i;
   supercontainer.id = newId;
 
