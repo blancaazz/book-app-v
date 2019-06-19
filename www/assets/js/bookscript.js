@@ -99,10 +99,7 @@ function newListElement(iTitle, iAbstract,image, genres, themes, iFactSheet) {
 
 
     //fact sheet
-    var factSheet = document.createElement("p");
-    var factSheetText = document.createTextNode(iFactSheet);
-    factSheet.appendChild(factSheetText);
-    document.getElementById("fact_sheet").appendChild(factSheet);
+    //setFactSheet(fact_sheet);
    
 }
 
@@ -280,6 +277,84 @@ function AddInfoAuthor(id, name, picture, bio){
 }
 
 
+
+
+
+
+function setFactSheet(fact){
+  //"fact_sheet"
+
+  var date = document.createElement("h6");
+  var dateText = document.createTextNode("Publication Date: ");
+  date.appendChild(dateText);
+
+  var dateD = document.createElement("p");
+  var dateDText = document.createTextNode(fact[0]);
+  dateD.appendChild(dateDText);
+
+
+  date.append(dateD);
+
+
+  var pages = document.createElement("h6");
+  var pagesText = document.createTextNode("Pages: ");
+  pages.appendChild(pagesText);
+
+  var pagesD = document.createElement("p");
+  var pagesDText = document.createTextNode(fact[1]);
+  pagesD.appendChild(pagesDText);
+
+
+  pages.append(pagesD);
+
+
+  var publisher = document.createElement("h6");
+  var publisherText = document.createTextNode("Publisher: ");
+  publisher.appendChild(publisherText);
+
+  var pD = document.createElement("p");
+  var pDText = document.createTextNode(fact[0]);
+  pD.appendChild(pDText);
+
+
+  publisher.append(pD);
+
+  var isbn = document.createElement("h6");
+  var isbnText = document.createTextNode("ISBN: ");
+  isbn.appendChild(isbnText);
+
+  var iD = document.createElement("p");
+  var iDText = document.createTextNode(fact[0]);
+  iD.appendChild(iDText);
+
+
+  isbn.append(iD);
+
+  var language = document.createElement("h6");
+  var languageText = document.createTextNode("Language: ");
+  language.appendChild(languageText);
+
+  var lD = document.createElement("p");
+  var lDText = document.createTextNode(fact[0]);
+  lD.appendChild(lDText);
+
+
+  language.append(lD);
+
+  document.getElementById("fact_sheet").appendChild(date);
+  document.getElementById("fact_sheet").appendChild(pages);
+  document.getElementById("fact_sheet").appendChild(publisher);
+  document.getElementById("fact_sheet").appendChild(isbn);
+  document.getElementById("fact_sheet").appendChild(language);
+
+}
+
+
+
+
+
+
+
 $(document).ready(function(){
 
   var bookID;
@@ -330,6 +405,7 @@ $(document).ready(function(){
     addAuthor(id);
     addSimilar(id);
 
+    setFactSheet(fact_sheet);
     
 
   };

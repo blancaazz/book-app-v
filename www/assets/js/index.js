@@ -162,7 +162,7 @@ function createRow(maxRow, id){
 }
 
 function booksStructure(){
-  var url = '/v2/books';
+  var url = '/v2/group/favourites';
 
   var xhttp = createCORSRequest('GET', url);
   if (!xhttp) {

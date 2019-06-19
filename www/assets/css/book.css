@@ -359,6 +359,14 @@ footer ul{
 }
 
 
+#fact_sheet h6{
+  font-weight: bold;
+}
+
+
+#fact_sheet p{
+  font-weight: normal;
+}
 
 
 .MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
