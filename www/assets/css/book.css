@@ -283,13 +283,13 @@ input[type=text]:focus, input[type=password]:focus {
 .content-back-image2{
   background-color: #343a40;
   color: white;
-  margin-right: 35px;
-  margin-left: 35px;
+  margin-right: 10%;
+  margin-left: 10%;
   padding: 30px 20px;
 }
 
 .content-back-image2 p{
-  padding: 40px 100px;
+  padding: 5% 10%;
 }
 
 
