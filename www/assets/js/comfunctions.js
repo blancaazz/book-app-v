@@ -42,6 +42,29 @@ function getEventById(eventId,returnFuntion){
   xhttp.send();
 }
 
+function getEventsThisMonth(returnFunction){
+
+  var url = '/v2/events/getThisMonthEvents';
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+    
+    var text = xhttp.responseText;
+    //$("#response").text(text);
+
+    returnFunction(text);
+    
+  };
+
+  xhttp.send();
+
+}
+
+
 
 function getEventBooks(eventId,returnFuntion){
 
