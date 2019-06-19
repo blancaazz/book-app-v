@@ -23,14 +23,6 @@ ul#navBarList li{
   font-weight: bold;
 
 }
-    
-/* Add a gray background color and some padding to the footer */
-/*
-ul#genres {
-  list-style : none;
-  
-}
-*/
 
 #carousell{
   display: inline-block;
@@ -50,9 +42,6 @@ ul#genres {
 .carousel-inner ul{
   list-style: none;
 }
-
-
-
 
 body {
   padding: 0;
@@ -79,7 +68,6 @@ body {
   background:#fff;
   color:#000;
 }
-
 
 
 .backLink a:link{
@@ -151,7 +139,6 @@ body {
   border-radius: 0;
   color:#fff;
   margin-top: 10px;
-  
 }
 
 
@@ -193,7 +180,6 @@ body {
  text-align:center
 }
 
-/* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
   padding: 15px; 
@@ -283,13 +269,13 @@ input[type=text]:focus, input[type=password]:focus {
 .content-back-image2{
   background-color: #343a40;
   color: white;
-  margin-right: 35px;
-  margin-left: 35px;
+  margin-right: 10%;
+  margin-left: 10%;
   padding: 30px 20px;
 }
 
 .content-back-image2 p{
-  padding: 40px 100px;
+  padding: 5% 10%;
 }
 
 
@@ -324,12 +310,10 @@ footer ul{
   color: white;
 }
 
-
 .my-row{
   margin-left: 2%;
   margin-right: 5%;
 }
-
 
 .my-form{
   background-color: #f1f1f1;
@@ -376,18 +360,11 @@ footer ul{
 .MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
 .MultiCarousel .leftLst { left:0; }
 .MultiCarousel .rightLst { right:0; }
-
 .MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
 
 
 
-
-
-
-
-
 /* ADJUSTING THE PAGE FOR THE RESOLUTIONS */
-
 
 
 

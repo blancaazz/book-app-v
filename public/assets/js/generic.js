@@ -83,7 +83,7 @@ function newListElement(iTitle,iData1,image, id_url, group_name) {
   var textData1 = document.createTextNode(iData1);
   
   var url = document.createElement("a");
-  var textUrl = document.createTextNode("Leer mas");
+  var textUrl = document.createTextNode("Read More");
   //url.href = 'book.html?id=' +  id;
   url.href = id_url;
 
