@@ -31,61 +31,7 @@ function createCORSRequest(method, url) {
 //the rest are the data to put
 
 function indexNewListElement(name, data, picture, id_url, categoria){
-   /*
-    var element = document.createElement("li");
-    element.className = "list-group-item"
-    idElement = "element" + aleatorio;
-    element.id =  idElement;
-
-        
-    var container = document.createElement("div");
-    var divRow = document.createElement("div");
-    var divLeftCol  = document.createElement("div");
-    var divRightCol  = document.createElement("div");
-    var divButtons = document.createElement("div");
-
-    var title = document.createElement("h3");
-    var textTitle = document.createTextNode(name);
-
-    var data1 = document.createElement("p");
-    var textData1 = document.createTextNode(data);
-    
-    var url = document.createElement("a");
-    var textUrl = document.createTextNode("Leer mas");
-    //url.href = 'book.html?id=' +  id;
-    url.href = id_url;
-
-    var img = document.createElement("img");
-    img.src = picture;
-
-    container.className="container features";
-    divRow.className = "row";
-    divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
-    divRightCol.className = "col-lg-8 col-md-4 col-sm-12";
-    //divButtons.className = "row";
-    divButtons.id = "listButtons";
-    title.className = "feature-title";
-    img.className = "img-fluid";
-
-    title.appendChild(textTitle);
-    data1.appendChild(textData1);
-    url.appendChild(textUrl);
-
-    divButtons.appendChild(url);
-
-    divRightCol.appendChild(title);
-    divRightCol.appendChild(data1);
-    divRightCol.appendChild(divButtons);
-    divLeftCol.appendChild(img);
-
-    divRow.appendChild(divLeftCol);
-    divRow.appendChild(divRightCol);
-
-    container.appendChild(divRow);
-    element.appendChild(container);
-
-    document.getElementById(categoria).appendChild(element);
-    */
+  
 }
 
 //this function would create a list with id = genre
@@ -107,15 +53,6 @@ function indexPrintElements(genre){
   categoriaH.appendChild(categoriaA);
 
   document.getElementById("indexBook").appendChild(categoriaH);
-/*
-  
-  var lista = document.createElement("ul");
-  lista.className = "list-group list-group-horizontal genres";
-  lista.id = genre;
-  //document.getElementById("indexBook").appendChild(lista);
-
-  document.getElementById("indexBook").appendChild(lista);
-  */
 
   var row = document.createElement("div");
   row.className = "row rowGenre";
@@ -147,17 +84,6 @@ function indexPrintElements(genre){
         var img = myObj[aleatorio].picture;
         var url = "book.html?id=" +  id
         aleatorio = (aleatorio + 1) % myObj.length;
-
-        //create the element of the list 
-       /* 
-        var element = document.createElement("li");
-        element.className = "list-group-item";
-        var idElement = "element" + aleatorio + genre;
-        element.id =  idElement;
-        //we append the element to the list:
-        lista.appendChild(element);
-        //call for creating a card and append it to the previous element;
-        */
 
         var element = document.createElement("div");
         element.className = "col-sm-3";
@@ -260,6 +186,7 @@ function booksStructure(){
       var fact_sheet = myObj[i].fact_sheet;
       var img = myObj[i].picture;
       var url = "book.html?id=" +  id;
+
       newCardElementIndex(name, themes, img, url, "booksRow" + parseInt(i/ bookForRow), i);
       //newCardElement(name,themes,img,url, "booksRow" + parseInt(i / bookForRow));
     }
@@ -271,12 +198,31 @@ function booksStructure(){
 
 
 $(document).ready(function(){
-    
-
+  
     //create structure for books
     booksStructure();
 
   //this function generates 4 genres randomly, and make 4 lists for each one with a max number of books of 4 (also randomly)
     indexAddGenres(); 
+
+
+    $('.leftLst, .rightLst').click(function () {
+        var condition = $(this).hasClass("leftLst");
+        if (condition)
+            click(0, this);
+        else
+            click(1, this)
+    });
+
+    ResCarouselSize();
+
+
+    $(window).resize(function () {
+        ResCarouselSize();
+    });
+
+
+
+
  });
  

@@ -148,59 +148,44 @@ function addAuthor(id_book){
 
 }
 
-function addListSimilar(id, name, picture, numero){
+function addListSimilar(id, name, url, picture){
   
-  if((numero % 3) == 0){
+  
     var container = document.createElement("div");
+    container.className= "item";
+   
+    var element = document.createElement("div");
+    element.className = "pad15 ";
 
-    if (numero == 0){
-      container.className = "carousel-item active";
-    }
-    else{
-      container.className = "carousel-item";
-    }
-
-    var list = document.createElement("ul");
-    list.className = "list-group list-group-horizontal";
-    list.id = "lista" + parseInt(numero / 3);
-    var element = document.createElement("li");
-    var nameH = document.createElement("h3");
+    var nameH = document.createElement("p");
+    nameH.className = "lead";
     var textName = document.createTextNode(name);
     nameH.appendChild(textName);
+
     var img = document.createElement("img");
     img.src = picture;
 
+    var aBook = document.createElement("a");
+    var aText = document.createTextNode("Go to this book");
+    aBook.className = "btn btn-primary btn-block"
+    aBook.href = url;
+    aBook.appendChild(aText);
+
+
+
     element.appendChild(nameH);
     element.appendChild(img);
-    list.appendChild(element);
-    container.appendChild(list);
+    element.appendChild(aBook);
+    container.appendChild(element);
 
   
     document.getElementById("carouselSimilarInner").appendChild(container);
-    
-  }
-  
-  else{
-
-    var list = document.getElementById("lista" + parseInt(numero/3));
-
-    var element = document.createElement("li");
-    var nameH = document.createElement("h3");
-    var textName = document.createTextNode(name);
-    nameH.appendChild(textName);
-    var img = document.createElement("img");
-    img.src = picture;
-
-    element.appendChild(nameH);
-    element.appendChild(img);
-
-    list.appendChild(element);
-  
-  }
+   
 
 }
 
 function addSimilar(id_book){
+
   var url = '/v2/books/getSimilar/'+ id_book;
 
   var xhttp = createCORSRequest('GET', url);
@@ -215,17 +200,22 @@ function addSimilar(id_book){
     var myJSON = text;
     var myObj = JSON.parse(myJSON);
 
-    var numero = 0;
+   
   //tener en cuenta que puede ser más de un autor(a)
   for(var i =0; i<myObj.length;i++){
     var id = myObj[i].id;
     var name =myObj[i].name;
     var picture = myObj[i].picture;
+
+    var url = "book.html?id=" +  id;
    // $("#textito").text(numero % 3);
-    addListSimilar(id, name, picture, numero)
-    numero = numero + 1;
+    addListSimilar(id, name, url,picture)
+    
   }
   //$("#textito").text(2 % 3);
+
+
+  ResCarouselSize();
 
 };
 
@@ -339,6 +329,8 @@ $(document).ready(function(){
     addAuthor(id);
     addSimilar(id);
 
+    
+
   };
 
   xhttp.send();
@@ -352,6 +344,23 @@ $(document).ready(function(){
     };
 
     reserveBook(bookID,loadFunction);
+  });
+
+
+  
+  $('.leftLst, .rightLst').click(function () {
+      var condition = $(this).hasClass("leftLst");
+      if (condition)
+          click(0, this);
+      else
+          click(1, this)
+  });
+
+
+  
+
+  $(window).resize(function () {
+      ResCarouselSize();
   });
 
 });
