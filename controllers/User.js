@@ -46,35 +46,6 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
     });
 };
 
-// module.exports.userLoginPOST = function userLoginPOST(req, res, next) {
-//   var username = req.swagger.params["username"].value;
-//   var password = req.swagger.params["password"].value;
-
-//   if(!req.session.loggedin) {
-//     if(req.session.isNew){
-//       req.session.loggedin = true;
-//       console.log("Need to Log in");
-//     }
-//   } else {
-//      req.session.loggedin = !req.session.loggedin;
-//      console.log("Already Log in");
-//   }
-
-//   User.userLoginPOST(username, password)
-//     .then(function(response) {
-//       try {
-//         utils.writeJson(res, response);
-//       }
-//       catch(err) {
-//         console.log("Try error: "+err);
-//       }
-//     })
-//     .catch(function(response) {
-//       console.log("error: "+response);
-//       utils.writeJson(res, response);
-//     });
-// };
-
 
 module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
 
@@ -85,21 +56,32 @@ module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
 
   User.userLogoutPOST()
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,200);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,200);
     });
 };
 
 
 module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
+
   var body = req.swagger.params['body'].value;
-  User.userRegisterPOST(body)
+
+  var name = body.user;
+  var username =  body.username;
+  var password =  body.password;
+  var residence =  body.residence;
+
+  console.log("Registering: "+username);
+
+  User.userRegisterPOST(2,name, username, password, residence)
     .then(function (response) {
+      console.log(response);
       utils.writeJson(res, response);
     })
     .catch(function (response) {
+      console.log(response);
       utils.writeJson(res, response);
     });
 };

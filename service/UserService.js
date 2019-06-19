@@ -64,10 +64,12 @@ exports.userLogoutPOST = function() {
  * body User 
  * no response value expected for this operation
  **/
-exports.userRegisterPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.userRegisterPOST = function(id,name, username, password, residence) {
+  
+  var size =  sqlDb('users').count('id');
+  
+  return sqlDb('users').insert({id: size,name_user: username,password: password});
+
 }
 
 /**

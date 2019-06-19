@@ -77,4 +77,79 @@ exports.getEventsBooks = function(eventId) {
       return result;
     })
 }
+
+
+/**
+ * Get all last month events
+ * Returns Events Array
+ *
+ * returns List
+ **/
+exports.getThisMonthEvents = function() {
+  return sqlDb("events")
+  .then (events => {
+    
+    var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+  
+    var limitMonth;
+    var limitYear;
+    console.log(d)
+
+    console.log("Today is: "+day+"/"+month+"/"+year);
+
+    if(month < 11){
+      limitMonth = month + 1;
+      limitYear = year;
+    }
+    else{
+      limitMonth = 1;
+      limitYear = year + 1;
+    }
+
+    console.log("Limit: "+day+"/"+limitMonth+"/"+limitYear);
+    
+    var arraylength = events.length;
+
+    console.log(arraylength);
+
+    var result = [];
+    var indexR = 0;
+
+    for(var i = 0; i < arraylength; i++)
+    {
+
+      var date = events[i].date;
+      var eDay = date.substring(0,2);
+      var eMonth = date.substring(3,5);
+      var eYear = date.substring(6,10);
+
+      console.log("Event: "+eDay+eMonth+eYear);
+
+      if(eYear>year && eYear <= limitYear){
+        result[indexR]=events[i];
+        indexR++;
+        console.log(events[i]);
+      }else if(eYear==year){
+        //console.log(events[i]);
+        if(eMonth > month && eMonth <= limitMonth && eDay <= day){
+          result[indexR]=events[i];
+          indexR++;
+          console.log(events[i]);
+        }else if(eMonth == month){
+          if(eDay >= day){
+            result[indexR]=events[i];
+            indexR++;
+            console.log(events[i]);
+          }
+        }
+      }
+    }
+
+    return result;
+  
+  })
+}
   

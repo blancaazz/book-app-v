@@ -112,5 +112,41 @@ function logoutFunc(returnFuntion){
     xhttp.send();
 
 }
+
+function registerUserFunction(name,username,password,residence){
+
+
+  var request = "name="+name+"&username="+username+"&password="+password+"&residence="+residence;
+
+  console.log("Button clicked");
+
+  var url = '/v2/user/register';
+
+
+  xhttp = createCORSRequest('POST', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhttp.onload = function() {
+    var text = "SEND";
+    
+
+    if(xhttp.status == 200){
+      console.log(xhttp.responseText);
+      alert("Congratulations! You have been registered");
+    }else{
+      console.log("ERROR: "+xhttp.responseText);
+      alert("Some error has happened, please try later");
+    }
+
+  };
+
+  
+  xhttp.send(request);
+
+}
   
   

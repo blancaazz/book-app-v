@@ -410,6 +410,26 @@ paths:
         404:
           description: "Event not found"
       x-swagger-router-controller: "Event"
+  /events/getThisMonthEvents:
+    get:
+      tags:
+      - "event"
+      summary: "Get all last month events"
+      description: "Returns Events Array"
+      operationId: "getThisMonthEvents"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
   /themes/getThemes:
     get:
       tags:
