@@ -90,8 +90,8 @@ function newListElement(iTitle,iData1,image, id_url, group_name) {
 
   container.className="container features listItem";
   divRow.className = "row";
-  divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
-  divRightCol.className = "col-lg-8 col-md-8 col-sm-12";
+  divLeftCol.className = "col-xl-4 col-lg-4 col-md-4 col-sm-12";
+  divRightCol.className = "col-xl-8 col-lg-8 col-md-8 col-sm-12";
   //divButtons.className = "row";
   divButtons.id = "listButtons";
   data1.className = "listMainData";

@@ -17,13 +17,14 @@
     
     //Variable with the actual book ID;
     eventID = GET["id"];
+
+    //We stablish the back link
+    $(".backLink").attr("href",document.referrer);
+
   
     let returnFunction = function(response){
 
       var text = response;
-      //$("#response").text(text);
-
-      //console.log(xhttp.status)
       console.log(text);
 
       var myJSON = text;
@@ -38,7 +39,6 @@
     let printBooksFunction = function(response){
       var myJSON = response;
       var myObj = JSON.parse(myJSON);
-      //$("#query").text(myObj.length);
   
       for(var i =0; i<myObj.length;i++){
         var name =myObj[i].name;
