@@ -169,3 +169,56 @@ function newCardElement(name, themes, picture, url, id){
   //supercontainer.appendChild(bodycontainer);
   document.getElementById(id).appendChild(bodycontainer);
 }
+
+function newCardElementEvent(name, city, date, url, id){
+  //PARTE de crear los elementos html
+
+  var bodycontainer = document.createElement("div");
+  bodycontainer.className = "card";
+
+  var container = document.createElement("div");
+  container.className = "card-body";
+
+
+  //name del event
+  var nameH = document.createElement("h4");
+  nameH.className="card-header"; 
+  var nameText = document.createTextNode(name);
+  nameH.appendChild(nameText);  
+  //data
+
+  //city
+  var cityP = document.createElement("h5");
+  city.className = "card-title";
+  var cityText = document.createTextNode(city);
+  cityP.appendChild(cityText);
+
+
+  //date
+
+  var dateP = document.createElement("p");
+  dateP.className = "card-text";
+  var dateText = document.createTextNode(date);
+  dateP.appendChild(dateText);
+
+
+  //link a la página del autor/a
+  var aBook = document.createElement("a");
+  var aText = document.createTextNode("Go to this event");
+  aBook.className = "btn btn-primary"
+  aBook.href = url;
+  aBook.appendChild(aText);
+
+
+
+  container.appendChild(cityP);
+  container.appendChild(dateP);
+
+  container.appendChild(aBook);
+
+  bodycontainer.appendChild(nameH);
+  bodycontainer.appendChild(container);
+  //bodycontainer.getElementById(id).appendChild(nameHBook);
+  //supercontainer.appendChild(bodycontainer);
+  document.getElementById(id).appendChild(bodycontainer);
+}

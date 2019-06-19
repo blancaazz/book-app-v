@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
     
 
@@ -27,7 +29,8 @@ $(document).ready(function(){
              var date = myObj[i].date;
              var id = myObj[i].id;
              var url = "event.html?id=" +  id
-             newListElement(name,place, "", url, "AllEvents");
+             //newListElement(name,place, "", url, "AllEvents");
+             newCardElementEvent(name, place, date, url, "divEventsMonth");
            }
          };
  

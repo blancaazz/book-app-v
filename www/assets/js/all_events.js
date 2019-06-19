@@ -21,8 +21,27 @@ $(document).ready(function(){
       var place = myObj[i].place;
       var date = myObj[i].date;
       var id = myObj[i].id;
-      var url = "event.html?id=" +  id
-      newListElement(name,place, "", url, "AllEvents");
+      var url = "event.html?id=" +  id;
+
+      if(i % 2 == 0){
+        cont = document.createElement("div");
+        cont.className = "container-fluid";
+        cont.id = "cont" + i;
+        row = document.createElement("div");
+        row.className = "row";
+        row.id = "row" + parseInt(i/2);
+        document.getElementById("AllEvents").appendChild(cont);
+        document.getElementById("cont" + i).appendChild(row);
+      }
+
+      col = document.createElement("div");
+      col.className = "col-sm-6";
+      idCol = "col" + i;
+      col.id = idCol;
+      document.getElementById("row" + parseInt(i/2)).appendChild(col);
+
+      newCardElementEvent(name, place, date, url, idCol);
+      //newListElement(name,place, "", url, "AllEvents");
     }
   };
 
