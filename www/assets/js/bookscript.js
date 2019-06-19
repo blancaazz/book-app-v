@@ -340,7 +340,7 @@ $(document).ready(function(){
   $("#reserveButton").click(function(){
     
     var loadFunction = function(){
-      $("#reserveButton").value = "Reserve Done"
+      $("#reserveButton").text("Reserve Done");
     };
 
     reserveBook(bookID,loadFunction);

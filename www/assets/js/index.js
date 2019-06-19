@@ -135,7 +135,7 @@ function indexAddGenres(){
 //then call the generic function newCardElement to creates a new card
 function newCardElementIndex(name, themes, picture, url, id, i){
   var supercontainer = document.createElement("div");
-  supercontainer.className = "col-md-4"
+  supercontainer.className = "col-sm-4"
   var newId = "col" + id + i;
   supercontainer.id = newId;
 
