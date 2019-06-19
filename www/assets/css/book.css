@@ -50,7 +50,9 @@ ul#genres {
   color:rgb(0, 0, 0);
 }
 
-
+.carousel-inner ul{
+  list-style: none;
+}
 
 
 
