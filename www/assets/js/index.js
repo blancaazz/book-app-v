@@ -222,10 +222,15 @@ function newCardElementIndex(name, themes, picture, url, id, i){
 
 function createRow(maxRow, id){
   for(var i = 0; i < maxRow; i++){
+    var container = document.createElement("div");
+    container.className = "container-fluid";
     var row = document.createElement("div");
     row.className = "row";
     row.id = "booksRow" + i;
-    document.getElementById(id).appendChild(row);
+
+    container.appendChild(row);
+
+   // document.getElementById(id).appendChild(container);
   }
 
 }
@@ -260,8 +265,11 @@ function booksStructure(){
       var fact_sheet = myObj[i].fact_sheet;
       var img = myObj[i].picture;
       var url = "book.html?id=" +  id;
-      newCardElementIndex(name, themes, img, url, "booksRow" + parseInt(i/ bookForRow), i);
+
+     // newCardElementIndex(name, themes, img, url, "booksRow" + parseInt(i/ bookForRow), i);
       //newCardElement(name,themes,img,url, "booksRow" + parseInt(i / bookForRow));
+
+      newCardElementIndex(name, themes, img, url, "row", i);
     }
   };
 

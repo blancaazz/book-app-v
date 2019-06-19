@@ -9,9 +9,6 @@ ul#navBarList li{
   color: violet;
 }
 
-
-
-
     
 /* Remove the jumbotron's default bottom margin */ 
 .jumbotron {
@@ -301,12 +298,15 @@ footer ul{
   color: white;
 }
 
+.my-row{
+  margin-left: 2%;
+  margin-right: 5%;
+}
 
 
-
-
-
-
+.my-form{
+  background-color: #f1f1f1;
+}
 
 
 

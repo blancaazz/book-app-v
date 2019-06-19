@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+
+  addThemes2("themesBar");
+
    //Get the query info
   var GET = {};
   var query = window.location.search.substring(1).split("&");
@@ -36,6 +39,8 @@ $(document).ready(function(){
       var url = "book.html?id=" +  id
       newListElement(name,abstract,img,url, "Themes");
     }
+
+    document.getElementById(GET["name"]).className += "active";
   };
 
     xhttp.send();

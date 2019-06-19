@@ -1,4 +1,11 @@
+
+
+
+
 $(document).ready(function(){
+
+
+  addGenres2("genresBar");
 
   //Get the query info
   var GET = {};
@@ -16,6 +23,9 @@ $(document).ready(function(){
   if (!xhttp) {
       throw new Error('CORS not supported');
   }
+
+
+
 
   xhttp.onload = function() {
     
@@ -36,6 +46,7 @@ $(document).ready(function(){
         var url = "book.html?id=" +  id
         newListElement(name,abstract,img,url, "Genres");
     }
+    document.getElementById(GET["name"]).className += "active";
   };
 
     xhttp.send();

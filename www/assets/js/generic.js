@@ -222,3 +222,94 @@ function newCardElementEvent(name, city, date, url, id){
   //supercontainer.appendChild(bodycontainer);
   document.getElementById(id).appendChild(bodycontainer);
 }
+
+
+
+
+//version2 with the id id to put the container in
+
+function addListGenre2(name, id){
+
+  var genre = document.createElement("a");
+  var textGenre = document.createTextNode(name);
+
+
+  genre.href = "genres.html?name="+ name;
+  genre.className = "list-group-item list-group-item-action";
+  genre.id = name;
+
+  genre.appendChild(textGenre);
+  document.getElementById(id).appendChild(genre);
+}
+
+
+function addGenres2(id){
+  var url = '/v2/genres/getGenres';
+
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+      
+    var text = xhttp.responseText;
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+
+  //tener en cuenta que puede ser más de un autor(a)
+    for(var i =0; i<myObj.length;i++){
+      var genre = myObj[i].name;
+      //$("#textito").text(theme);
+      addListGenre2(genre, id);
+    }
+  }
+
+  xhttp.send();
+}
+
+
+
+
+function addListTheme2(name, id){
+  var theme = document.createElement("a");
+  var textTheme = document.createTextNode(name);
+
+  theme.href = "themes.html?name="+ name;
+  theme.className = "list-group-item list-group-item-action";
+  theme.id = name;
+
+  theme.appendChild(textTheme);
+  document.getElementById(id).appendChild(theme);
+
+
+}
+  
+function addThemes2(id){
+  var url = '/v2/themes/getThemes';
+
+
+  var xhttp = createCORSRequest('GET', url);
+  if (!xhttp) {
+      throw new Error('CORS not supported');
+  }
+
+  xhttp.onload = function() {
+      
+    var text = xhttp.responseText;
+
+    var myJSON = text;
+    var myObj = JSON.parse(myJSON);
+
+  //tener en cuenta que puede ser más de un autor(a)
+    for(var i =0; i<myObj.length;i++){
+      var theme = myObj[i].name;
+      //$("#textito").text(theme);
+      addListTheme2(theme, id);
+    }
+  }
+
+  xhttp.send();
+}
