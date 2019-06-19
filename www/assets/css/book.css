@@ -216,16 +216,18 @@ input[type=text]:focus, input[type=password]:focus {
 
 }
 
+.card-container{
+  width: 80%
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  width: 50%;
-  height: 50%;
+  width: 60%; 
   border-radius: 5px;
   margin-top: 40px;
   margin-bottom: 40px;
   margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  margin-right: auto;  
 }
 
 .card:hover {
@@ -253,12 +255,12 @@ input[type=text]:focus, input[type=password]:focus {
   margin-left: 2%;
   margin-right: 2%;
   background-color: #343a40;
-  color: white;
+  color: rgb(0, 0, 0);
+  text-align: center;
 }
 .rowGenre .card{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   width: 50%;
-  height: 30%;
   border-radius: 5px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -270,6 +272,9 @@ input[type=text]:focus, input[type=password]:focus {
 .rowGenre .card a{
   font-size: 90%;
 }
+
+
+
 
 footer{
   background-color: #343a40;
@@ -309,6 +314,18 @@ footer ul{
 }
 
 
+.MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
+.MultiCarousel .MultiCarousel-inner { transition: 1s ease all; float: left; }
+.MultiCarousel .MultiCarousel-inner .item { float: left;}
+.MultiCarousel .MultiCarousel-inner .item > div { text-align: center; padding:10px; margin:10px; background:#f1f1f1; color:#666;}
+.MultiCarousel .leftLst, .MultiCarousel .rightLst { position:absolute; border-radius:50%;top:calc(50% - 20px); }
+.MultiCarousel .leftLst { left:0; }
+.MultiCarousel .rightLst { right:0; }
+
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over { pointer-events: none; background:#ccc; }
+
+
+
 
 
 
@@ -344,6 +361,12 @@ footer ul{
   .listItem{
     max-width: 70%;
   }
+  .card-container{
+    width: 80%
+  }
+  .card {
+    width: 60%; 
+  }
 }
 /* Large Size screen */
 @media (max-width: 1499px) and (min-width: 1000px) {
@@ -370,6 +393,12 @@ footer ul{
 
   .listItem{
     max-width: 80%;
+  }
+  .card-container{
+    width: 80%
+  }
+  .card {
+    width: 80%; 
   }
 }
 
@@ -398,7 +427,12 @@ footer ul{
   .listItem{
     max-width: 90%;
   }
-
+  .card-container{
+    width: 100%
+  }
+  .card {
+    width: 100%; 
+  }
   
 }
 
@@ -429,5 +463,10 @@ footer ul{
     max-width: 90%;
   }
 
- 
+  .card-container{
+    width: 100%
+  }
+  .card {
+    width: 100%; 
+  }
 }
