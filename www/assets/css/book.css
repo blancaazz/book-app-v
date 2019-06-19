@@ -131,7 +131,7 @@ body {
 }
 
 .content-back-image {
-  background-image: url(/assets/img/header-bg.jpg) ;
+  background-image: url(/assets/img/header-bg.jpg) ; 
 
   background-size: cover;
   display: block;
@@ -312,6 +312,31 @@ footer ul{
 .my-form{
   background-color: #f1f1f1;
 }
+
+
+
+.my-h1{
+  margin-top: 5%;
+}
+
+
+.container_ordering{
+  background-color: #343a40;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 2%;
+  margin-right: 2%; 
+  height: 200px;
+  text-align: center;
+
+  color: white;
+}
+
+.container_ordering p{
+  padding: 50px 0px;
+}
+
+
 
 
 .MultiCarousel { float: left; overflow: hidden; padding: 15px; width: 100%; position:relative; }
