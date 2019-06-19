@@ -148,7 +148,16 @@ function createCORSRequest(method, url) {
         var picture = myObj[i].picture;
         var literary_genres = myObj[i].literary_genres;
         var themes = myObj[i].themes;
-        addBookElement(name, picture, literary_genres, themes);
+        
+        col = document.createElement("div");
+        col.className = "col-sm-3";
+        document.getElementById("book_list").appendChild(col);
+        colId = "col" + i;
+        col.id = colId;
+
+        var url_book = "book.html?id=" +  id;
+
+        newCardElement(name, themes, picture, url_book, colId);
       }
 
       //$("#textito").text(name);
