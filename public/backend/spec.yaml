@@ -1,0 +1,838 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple bookstore server with a book inventory, users and\
+    \ a shopping cart."
+  version: "1.0.0"
+  title: "Simple Bookstore"
+  contact:
+    email: "carlos.vega@mail.polimi.it"
+  license:
+    name: "Apache-2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/v2"
+tags:
+- name: "book"
+  description: "Available book"
+- name: "author"
+  description: "Authors"
+- name: "event"
+  description: "Events"
+- name: "group"
+  description: "Groups"
+- name: "user"
+  description: "Operations about user"
+schemes:
+- "http"
+paths:
+  /books:
+    get:
+      tags:
+      - "book"
+      summary: "Books available in the inventory"
+      description: "List of books available in the inventory"
+      operationId: "booksGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/{bookId}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book by ID"
+      description: "Returns a book"
+      operationId: "getBookById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/getId/{bookName}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book by name"
+      description: "Returns a ID"
+      operationId: "getBookId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookName"
+        in: "path"
+        description: "Name of book to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/IdObject"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/getAuthor/{bookId}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book Author"
+      description: "Returns an author"
+      operationId: "getBookAuthor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        description: "ID of book to search"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "A collection of Authors"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Book"
+  /books/getEvents/{bookId}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book Event"
+      description: "Returns an event"
+      operationId: "getBookEvent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        description: "ID of book to search"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/getSimilar/{bookId}:
+    get:
+      tags:
+      - "book"
+      summary: "Find similar book"
+      description: "Returns a book"
+      operationId: "getSimilarBook"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        description: "ID of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /authors:
+    get:
+      tags:
+      - "author"
+      summary: "Authors available in the inventory"
+      description: "List of all authors"
+      operationId: "authorsGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Authors"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Author"
+  /authors/{authorId}:
+    get:
+      tags:
+      - "author"
+      summary: "Find Author by ID"
+      description: "Returns an author"
+      operationId: "getAuthorById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "authorId"
+        in: "path"
+        description: "ID of Author to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Author"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /authors/getId/{authorName}:
+    get:
+      tags:
+      - "author"
+      summary: "Find author by name"
+      description: "Returns a ID"
+      operationId: "getAuthorId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "authorName"
+        in: "path"
+        description: "Name of author to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/IdObject"
+        400:
+          description: "Invalid name supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /authors/getBooks/{authorId}:
+    get:
+      tags:
+      - "author"
+      summary: "Find Author's books"
+      description: "Returns an array of books"
+      operationId: "getAuthorBooks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "authorId"
+        in: "path"
+        description: "ID of book to search"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /events:
+    get:
+      tags:
+      - "event"
+      summary: "Get all events"
+      description: "Returns Events Array"
+      operationId: "getEvents"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
+  /events/{eventId}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by ID"
+      description: "Returns an event"
+      operationId: "geteventById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/getId/{eventName}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by name"
+      description: "Returns a ID"
+      operationId: "getEventId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventName"
+        in: "path"
+        description: "Name of event to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/IdObject"
+        400:
+          description: "Invalid name supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/getBooks/{eventId}:
+    get:
+      tags:
+      - "event"
+      summary: "Get books of event"
+      description: "Returns a book"
+      operationId: "getEventsBooks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/getThisMonthEvents:
+    get:
+      tags:
+      - "event"
+      summary: "Get all last month events"
+      description: "Returns Events Array"
+      operationId: "getThisMonthEvents"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
+  /themes/getThemes:
+    get:
+      tags:
+      - "group"
+      summary: "Get Themes names"
+      description: "Returns Group Array"
+      operationId: "getThemesList"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Themes"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Group"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Group"
+  /themes/getBooks/{themeName}:
+    get:
+      tags:
+      - "group"
+      summary: "Get list of books"
+      description: "Returns an array of books"
+      operationId: "getThemesBooks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "themeName"
+        in: "path"
+        description: "Name of book to search"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Theme not found"
+      x-swagger-router-controller: "Group"
+  /genres/getGenres:
+    get:
+      tags:
+      - "group"
+      summary: "Get Genres names"
+      description: "Returns Group Array"
+      operationId: "getGenresList"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Genres"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Group"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Group"
+  /genre/getBooks/{genreName}:
+    get:
+      tags:
+      - "group"
+      summary: "Get list of books"
+      description: "Returns an array of books"
+      operationId: "getGenresBooks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "genreName"
+        in: "path"
+        description: "ID of book to search"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Theme not found"
+      x-swagger-router-controller: "Group"
+  /group/{groupName}:
+    get:
+      tags:
+      - "group"
+      summary: "Get list of books"
+      description: "Returns an array of books"
+      operationId: "getGroupBooks"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "groupName"
+        in: "path"
+        description: "Name of book group"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Group not found"
+      x-swagger-router-controller: "Group"
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Login"
+      description: "Login with a form"
+      operationId: "userLoginPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfull login"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/logout:
+    post:
+      tags:
+      - "user"
+      summary: "Logout"
+      description: "Logout with a form"
+      operationId: "userLogoutPOST"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "succesfull logout"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/getUserName:
+    get:
+      tags:
+      - "user"
+      summary: "Get actual user name"
+      description: "Returns string"
+      operationId: "getUserName"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "User Name"
+          schema:
+            type: "string"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/reserveBook:
+    post:
+      tags:
+      - "user"
+      summary: "reserveBook"
+      description: "Logged user Reserve Book"
+      operationId: "userReserveBook"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfull Reserve"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/deleteReservedBook:
+    post:
+      tags:
+      - "user"
+      summary: "reserveBook"
+      description: "Logged user Reserve Book"
+      operationId: "userDeleteReserve"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookId"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Succesfully Removed"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/getShoppingCart:
+    get:
+      tags:
+      - "user"
+      summary: "Get actual user shopping cart"
+      description: "Returns array of books"
+      operationId: "getShoppingCart"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/register:
+    post:
+      tags:
+      - "user"
+      summary: "Register"
+      description: "Register into the store"
+      operationId: "userRegisterPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "succesfull registration"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      address:
+        type: "string"
+      creditcard:
+        type: "string"
+    title: "User"
+    description: "A user"
+    example:
+      id: 1
+      name: "Vittorio"
+      address: "DEIB"
+      creditcard: "xyzabc"
+  IdObject:
+    type: "object"
+    required:
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "double"
+    description: "Id number\n"
+    example:
+      value: 10
+  Book:
+    type: "object"
+    required:
+    - "author"
+    - "price"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      author:
+        type: "string"
+      price:
+        $ref: "#/definitions/Amount"
+      status:
+        type: "string"
+        description: "book availability in the inventory"
+        enum:
+        - "available"
+        - "out of stock"
+    title: "Book"
+    description: "A book for sale in the store"
+    example:
+      id: 0
+      title: "Il deserto dei tartari"
+      author: "Dino Buzzati"
+      price:
+        value: 10
+        currency: "eur"
+      status: "available"
+  Author:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    title: "Author"
+    description: "Author Data"
+    example:
+      id: 0
+      name: "Cervantes"
+  Event:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      date:
+        type: "string"
+      location:
+        type: "string"
+    title: "Event"
+    description: "Event Data"
+    example:
+      id: 0
+      name: "Book Expo"
+      location: "Politecnico di Milano"
+      date: "21-10-1998"
+  Group:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+    title: "Group"
+    description: "Group Data"
+    example:
+      id: 0
+      name: "Group X"
+  Amount:
+    type: "object"
+    required:
+    - "currency"
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "double"
+        minimum: 0.01
+        maximum: 1000000000000000
+      currency:
+        $ref: "#/definitions/Currency"
+    description: "Price\n"
+    example:
+      currency: "eur"
+      value: 11
+  Currency:
+    type: "string"
+    pattern: "^[A-Z]{3,3}$"
+    description: "some description\n"
+    example: "eur"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

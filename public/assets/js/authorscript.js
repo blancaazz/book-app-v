@@ -150,7 +150,7 @@ function createCORSRequest(method, url) {
         var themes = myObj[i].themes;
         
         col = document.createElement("div");
-        col.className = "col-sm-3";
+        col.className = "col-sm-6 col-md-4 col-lg-3";
         document.getElementById("book_list").appendChild(col);
         colId = "col" + i;
         col.id = colId;
