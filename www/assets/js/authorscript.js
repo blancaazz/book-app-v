@@ -37,7 +37,7 @@ function createCORSRequest(method, url) {
     img.className = "imag-fluid";
   
   
-    var nameH = document.createElement("h4");
+    var nameH = document.createElement("h2");
     var nameText = document.createTextNode(name);
     nameH.appendChild(nameText);
     
@@ -47,7 +47,7 @@ function createCORSRequest(method, url) {
     bioP.appendChild(bioText);
   
     document.getElementById("image_author").appendChild(img);
-    document.getElementById("description_author").appendChild(nameH);
+    document.getElementById("description").appendChild(nameH);
     document.getElementById("description_author").appendChild(bioP);
   }
 
@@ -160,24 +160,21 @@ function createCORSRequest(method, url) {
 
   $(document).ready(function(){
 
-	var GET = {};
-	var query = window.location.search.substring(1).split("&");
-	for (var i = 0, max = query.length; i < max; i++) {
-		if (query[i] === "") // check for trailing & with no param
-			continue;
-		var param = query[i].split("=");
-		GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
-	}
+
+     //Getting the ID from the URL
+    var GET = {};
+    var query = window.location.search.substring(1).split("&");
+    for (var i = 0, max = query.length; i < max; i++) {
+      if (query[i] === "") // check for trailing & with no param
+        continue;
+      var param = query[i].split("=");
+      GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
+    }
     
-
-
-    //console.log("Poniendo ready esto");
-
-    $("#textito").text(GET["id"]);
+    //We stablish the back link
+    $(".backLink").attr("href",document.referrer);
 
     var url = '/v2/authors/'+ GET["id"];
-
-    //$("#textito").text(url);
 
     var xhttp = createCORSRequest('GET', url);
     if (!xhttp) {
@@ -187,8 +184,6 @@ function createCORSRequest(method, url) {
     xhttp.onload = function() {
       
       var text = xhttp.responseText;
-      //$("#response").text(text);
-
       var myJSON = text;
       var myObj = JSON.parse(myJSON);
 
@@ -196,8 +191,6 @@ function createCORSRequest(method, url) {
       var id = myObj[0].id;
       var bio = myObj[0].bio;
       var picture = myObj[0].picture;
-
-      //$("#textito").text(name);
 
       AddInfoAuthor(id, name, picture, bio);
       addBookList(id);
