@@ -45,7 +45,7 @@
         var themes = myObj[i].abstract;
         var id = myObj[i].id;
         var img = myObj[i].picture;
-        var url = "book.html?id=" +  id
+        var url = "book.html?id=" +  id;
         newListElement(name,themes,img,url, "Event");
       }
    

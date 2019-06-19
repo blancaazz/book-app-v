@@ -265,6 +265,7 @@ function AddInfoAuthor(id, name, picture, bio){
   var aText = document.createTextNode("Go to this author");
   aAuthor.href = "author.html?id=" + id;
   aAuthor.appendChild(aText);
+  aAuthor.className = "btn btn-primary";
 
 
   container.appendChild(nameH);

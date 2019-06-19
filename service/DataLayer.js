@@ -25,28 +25,28 @@ let errorTables;
 //  });
 
 
-  //  let sqlDb = knex({
-  //    client: 'pg',
-  //    version: '7.2',
-  //    connection: {
-  //      host : 'localhost',
-  //      user : 'blanca',
-  //      database : 'BooksDb',
-  //      port : 5432
-  //    }
-  //  });
+   let sqlDb = knex({
+     client: 'pg',
+     version: '7.2',
+     connection: {
+       host : 'localhost',
+       user : 'blanca',
+       database : 'BooksDb',
+       port : 5432
+     }
+   });
 
  
-let sqlDb = knex({
-  client: 'pg',
-  version: '7.2',
-  connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'vegagc',
-    database : 'mylocaldb'
-  }
-});
+// let sqlDb = knex({
+//   client: 'pg',
+//   version: '7.2',
+//   connection: {
+//     host : '127.0.0.1',
+//     user : 'postgres',
+//     password : 'vegagc',
+//     database : 'mylocaldb'
+//   }
+// });
 
 
 
