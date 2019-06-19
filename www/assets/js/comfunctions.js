@@ -136,8 +136,10 @@ function registerUserFunction(name,username,password,residence){
 
     if(xhttp.status == 200){
       console.log(xhttp.responseText);
+      alert("Congratulations! You have been registered");
     }else{
       console.log("ERROR: "+xhttp.responseText);
+      alert("Some error has happened, please try later");
     }
 
   };

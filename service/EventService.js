@@ -85,12 +85,7 @@ exports.getEventsBooks = function(eventId) {
  *
  * returns List
  **/
-exports.getLastMonthEvents = function() {
-
- 
-
-
-
+exports.getThisMonthEvents = function() {
   return sqlDb("events")
   .then (events => {
     

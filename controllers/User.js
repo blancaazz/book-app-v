@@ -56,10 +56,10 @@ module.exports.userLogoutPOST = function userLogoutPOST (req, res, next) {
 
   User.userLogoutPOST()
     .then(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,200);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response,200);
     });
 };
 

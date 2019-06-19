@@ -410,13 +410,13 @@ paths:
         404:
           description: "Event not found"
       x-swagger-router-controller: "Event"
-  /events/getLastMonthEvents:
+  /events/getThisMonthEvents:
     get:
       tags:
       - "event"
       summary: "Get all last month events"
       description: "Returns Events Array"
-      operationId: "getLastMonthEvents"
+      operationId: "getThisMonthEvents"
       produces:
       - "application/json"
       parameters: []

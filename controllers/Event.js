@@ -48,8 +48,8 @@ module.exports.getEventsBooks = function getEventsBooks (req, res, next) {
     });
 };
 
-module.exports.getLastMonthEvents = function getLastMonthEvents (req, res, next) {
-  Event.getLastMonthEvents()
+module.exports.getThisMonthEvents = function getThisMonthEvents (req, res, next) {
+  Event.getThisMonthEvents()
     .then(function (response) {
       utils.writeJson(res, response);
     })
