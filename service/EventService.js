@@ -95,39 +95,66 @@ exports.getLastMonthEvents = function() {
   .then (events => {
     
     var d = new Date();
-    var day = d.getDay();
-    var month = d.getMonth();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
     var year = d.getFullYear();
   
-    if(month > 1)
-      month = month - 1;
-    else
-      month = 12;
-      year = year - 1;
-  
-    console.log(date);
+    var limitMonth;
+    var limitYear;
+    console.log(d)
 
-    console.log(events.length);
+    console.log("Today is: "+day+"/"+month+"/"+year);
 
-    var result;
-    for(i = 0; i < events.length; i++)
+    if(month < 11){
+      limitMonth = month + 1;
+      limitYear = year;
+    }
+    else{
+      limitMonth = 1;
+      limitYear = year + 1;
+    }
+
+    console.log("Limit: "+day+"/"+limitMonth+"/"+limitYear);
+    
+    var arraylength = events.length;
+
+    console.log(arraylength);
+
+    var result = [];
+    var indexR = 0;
+
+    for(var i = 0; i < arraylength; i++)
     {
 
       var date = events[i].date;
-      var eDay = date.substring(0,1);
-      var eMonth = date.substring(2,3);
-      var eYear = date.substring(5,8);
+      var eDay = date.substring(0,2);
+      var eMonth = date.substring(3,5);
+      var eYear = date.substring(6,10);
 
       console.log("Event: "+eDay+eMonth+eYear);
 
-      if(eYear>=year && eMonth >= month && eDay >= day){
+      if(eYear>year && eYear <= limitYear){
+        result[indexR]=events[i];
+        indexR++;
         console.log(events[i]);
+      }else if(eYear==year){
+        //console.log(events[i]);
+        if(eMonth > month && eMonth <= limitMonth && eDay <= day){
+          result[indexR]=events[i];
+          indexR++;
+          console.log(events[i]);
+        }else if(eMonth == month){
+          if(eDay >= day){
+            result[indexR]=events[i];
+            indexR++;
+            console.log(events[i]);
+          }
+        }
       }
     }
 
-
-
     return result;
+  
   })
 }
   
