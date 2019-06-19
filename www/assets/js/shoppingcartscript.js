@@ -123,8 +123,8 @@ function newListElement(iTitle,iData1,image, id) {
 
   container.className="container features";
   divRow.className = "row";
-  divLeftCol.className = "col-lg-4 col-md-4 col-sm-12";
-  divRightCol.className = "col-lg-8 col-md-4 col-sm-12";
+  divLeftCol.className = "col-md-4 col-sm-12";
+  divRightCol.className = "col-md-8 col-sm-12";
   //divButtons.className = "row";
   divButtons.id = "listButtons";
   title.className = "feature-title";
