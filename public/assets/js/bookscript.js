@@ -313,7 +313,7 @@ function setFactSheet(fact){
   publisher.appendChild(publisherText);
 
   var pD = document.createElement("p");
-  var pDText = document.createTextNode(fact[0]);
+  var pDText = document.createTextNode(fact[2]);
   pD.appendChild(pDText);
 
 
@@ -324,7 +324,7 @@ function setFactSheet(fact){
   isbn.appendChild(isbnText);
 
   var iD = document.createElement("p");
-  var iDText = document.createTextNode(fact[0]);
+  var iDText = document.createTextNode(fact[3]);
   iD.appendChild(iDText);
 
 
@@ -335,7 +335,7 @@ function setFactSheet(fact){
   language.appendChild(languageText);
 
   var lD = document.createElement("p");
-  var lDText = document.createTextNode(fact[0]);
+  var lDText = document.createTextNode(fact[4]);
   lD.appendChild(lDText);
 
 
