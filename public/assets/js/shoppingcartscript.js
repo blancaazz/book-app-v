@@ -110,7 +110,7 @@ function newListElement(iTitle,iData1,image, id) {
   var textData1 = document.createTextNode(iData1);
   
   var url = document.createElement("a");
-  var textUrl = document.createTextNode("Leer mas");
+  var textUrl = document.createTextNode("Read more");
   url.href = 'book.html?id=' +  id;
 
   var deleteButton = document.createElement("button");

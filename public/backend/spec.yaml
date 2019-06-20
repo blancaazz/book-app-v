@@ -706,17 +706,17 @@ definitions:
         type: "integer"
       name:
         type: "string"
-      address:
+      password:
         type: "string"
-      creditcard:
+      address:
         type: "string"
     title: "User"
     description: "A user"
     example:
       id: 1
-      name: "Vittorio"
-      address: "DEIB"
-      creditcard: "xyzabc"
+      name: "Carlos"
+      password: "pass"
+      address: "Casa dello Studente"
   IdObject:
     type: "object"
     required:
@@ -738,28 +738,32 @@ definitions:
       id:
         type: "integer"
         format: "int64"
-      title:
+      name:
         type: "string"
-      author:
+      picture:
         type: "string"
-      price:
-        $ref: "#/definitions/Amount"
-      status:
+      literary_genres:
+        type: "array"
+        items:
+          type: "string"
+      themes:
+        type: "array"
+        items:
+          type: "string"
+      abstract:
         type: "string"
-        description: "book availability in the inventory"
-        enum:
-        - "available"
-        - "out of stock"
+      fact_sheet:
+        type: "string"
     title: "Book"
     description: "A book for sale in the store"
     example:
       id: 0
-      title: "Il deserto dei tartari"
-      author: "Dino Buzzati"
-      price:
-        value: 10
-        currency: "eur"
-      status: "available"
+      name: "The Hobbit"
+      author: "/urlImage"
+      literary_genres: {Fantasy, Juvenil}
+      themes: {Friendship, Will}
+      Abstract: "Abstract"
+      fact_sheet: "Fact Sheet"
   Author:
     type: "object"
     required:
@@ -770,11 +774,17 @@ definitions:
         format: "int64"
       name:
         type: "string"
+      bio:
+        type: "string"
+      picture:
+        type: "string"
     title: "Author"
     description: "Author Data"
     example:
       id: 0
       name: "Cervantes"
+      bio: "bio"
+      picture: "/url"
   Event:
     type: "object"
     required:
@@ -811,28 +821,6 @@ definitions:
     example:
       id: 0
       name: "Group X"
-  Amount:
-    type: "object"
-    required:
-    - "currency"
-    - "value"
-    properties:
-      value:
-        type: "number"
-        format: "double"
-        minimum: 0.01
-        maximum: 1000000000000000
-      currency:
-        $ref: "#/definitions/Currency"
-    description: "Price\n"
-    example:
-      currency: "eur"
-      value: 11
-  Currency:
-    type: "string"
-    pattern: "^[A-Z]{3,3}$"
-    description: "some description\n"
-    example: "eur"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
