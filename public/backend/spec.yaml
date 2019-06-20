@@ -730,10 +730,6 @@ definitions:
       value: 10
   Book:
     type: "object"
-    required:
-    - "author"
-    - "price"
-    - "title"
     properties:
       id:
         type: "integer"

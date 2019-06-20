@@ -62,7 +62,7 @@
 <li>Deliverable D2: the YAML or JSON file containing the specification of the app API can be found at <a href="http://book-app-v.herokuapp.com/backend/spec.yaml">this address</a>.</li>
 <li>Deliverable D3: the SwaggerUI page of the same API is available at <a href="https://book-app-v.herokuapp.com/docs/">this address</a>.</li>
 <li>Deliverable D4: the source code of D0 is available as a zip file at <a href="http://book-app-v.herokuapp.com/backend/app.zip">this address</a>.</li>
-<li>Deliverable D5: the address of the online source control repository is available <a href="https://blancaazz@bitbucket.org/blancaazz/book.git ">this address</a>. We hereby declare that this is a private repository and, upon request, we will give access to the instructors.</li>
+<li>Deliverable D5: the address of the online source control repository is available <a href="https://bitbucket.org/blancaazz/book.git ">this address</a>. We hereby declare that this is a private repository and, upon request, we will give access to the instructors.</li>
 </ul>
 <h2 id="specification">Specification</h2>
 <h3 id="web-architecture">Web Architecture</h3>
@@ -73,7 +73,7 @@
 <h3 id="api">API</h3>
 <h4 id="rest-compliance">REST compliance</h4>
 <p>Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.</p>
-<p>We have based int REST using mainly interactions of Level 2. We focus in creating more specific functions with the purpouse of reduciong complexity in the presentation layer.</p>
+<p>We have based int REST using mainly interactions of Level 2. We focus in creating more specific functions with the purpouse of reduciong complexity in the presentation layer. Resources are identified by uniform resource identifiers (URIs) to provide a uniform interface. We have two kinds of resources. Individual resources that map to one element (get book by id, get author by id , …). And collection of resources. These collections of resources are filtered according to differentes parameters. The methods used in all is practicly the same. In some of them we need to do a subquery.</p>
 <h4 id="openapi-resource-models">OpenAPI Resource models</h4>
 <p>Describe here synthetically, which models you have introduced for resources.</p>
 <ul>
@@ -174,6 +174,7 @@
 </ul></li>
 </ul></li>
 </ul>
+
 <h3 id="discussion">Discussion</h3>
 <p>Describe here:</p>
 <ul>
@@ -183,15 +184,23 @@
 </ul></li>
 <li><p>Why do you think your web application adheres to common practices to partition the web application (static assets vs. application data)</p>
 <ul>
-<li>Because it makes the development easier and they have different purposes.</li>
+<li>Because it makes the development easier and they have different purposes. The static assets are the elements that doesn’t change from the point of view of the server, so we include them in a separate folder. The aplication data is provided dynamically by the server, so it has more complex and is where we focus in the backend. Finally, this partition lets the profesionals to focus in the front-end or back-end.</li>
 </ul></li>
 <li><p>Describe synthetically why and how did you manage session state, what are the state change triggering actions (e.g., POST to login etc..).</p></li>
 </ul>
 <ol type="1">
-<li>/user/login and we send the user and password.</li>
-<li>If the data is correct with the database we set: a)req.session.loggedin = true b)req.session.name = user id</li>
-<li>Now the user logged in, and this will continue throw every page.</li>
-<li>For logging out we send a POST to /user/logout and now: a)req.session.loggedin = null b)req.session.name = null</li>
+<li><p>/user/login and we send the user and password.</p></li>
+<li><p>If the data is correct with the database we set:</p>
+<ol type="1">
+<li>req.session.loggedin = true</li>
+<li>req.session.name = user id</li>
+</ol></li>
+<li><p>Now the user logged in, and this will continue throw every page.</p></li>
+<li><p>For logging out we send a POST to /user/logout and now:</p>
+<ol type="1">
+<li>req.session.loggedin = null</li>
+<li>req.session.name = null</li>
+</ol></li>
 </ol>
 <ul>
 <li><p>Which technology did you use (relational or a no-SQL database) for managing the data model?</p>
@@ -199,6 +208,7 @@
 <li>We use a postgress database which is based on SQL.</li>
 </ul></li>
 </ul>
+
 <h2 id="other-information">Other information</h2>
 <h3 id="task-assignment">Task assignment</h3>
 <p>Describe here how development tasks have been subdivided among members of the group, e.g.:</p>
@@ -206,23 +216,30 @@
 <li>Blanca: API specification 50%, database 80%, API implementation 40%, front-End 50%</li>
 <li>Carlos: API specification 50%, database 20%, API implementation 60% front-End 50%</li>
 </ul>
+
 <h3 id="analysis-of-existing-api">Analysis of existing API</h3>
 <p>Describe here if you have found relevant APIs that have inspired the OpenAPI specification and why (at least two).</p>
 <p>First of all we have based our the API in the example we worked in class. From it we obtain the main structure and some ideas.</p>
 <p>We also analyse some APIs that used coockies like <a href="https://app.swaggerhub.com/apis/ponelat/with-cookies/1">example</a> that used techniques of autentication, but finally we didn’t follow this technique.</p>
+
 <h3 id="learning-outcome">Learning outcome</h3>
 <p>What was the most important thing all the members have learned while developing this part of the project, what questions remained unanswered, how you will use what you’ve learned in your everyday life?</p>
-<p>-Carlos learned: a) To use Swagger and the OpenAPI specification b) How to work with SQL databases. c) Use coockies Sessions</p>
+<p>*Carlos learned:</p>
+<ol type="1">
+<li>To use Swagger and the OpenAPI specification</li>
+<li>How to work with SQL databases.</li>
+<li>Use coockies Sessions</li>
+</ol>
 <p>And would like to learn more about techniques of logging and security with users and sessions.</p>
-<p>About his everyday life, he understands better the web technologies that are under the pages and he is more awake.</p>
-<p>- Blanca learned: a) To use Swagger and the OpenAPI specification b) How to work with SQL databases c)How to use Postgres d)How to implement the front-end of a webpage</p>
-<p>She would like to learn more about stilying the front-end and implementing also interesting graphics objet (web gl...)</p>
+<p>About his everyday life, he understands better the web technologies that are under the pages and now he analyses for getting ideas for future projects.</p>
+<p>*Blanca learned:</p>
+<ol type="1">
+<li>To use Swagger and the OpenAPI specification</li>
+<li>How to work with SQL databases</li>
+<li>How to use Postgres</li>
+<li>How to implement the front-end of a webpage</li>
+</ol>
+<p>She would like to learn more about stilying the front-end and implementing also interesting graphics objet (web gl…)</p>
 
-
-<!-- <p>Examples:</p>
-<ul>
-<li>Foo learned to write SQL queries and Javascript but wanted to know more about caching, he’s probably going to create his own startup with what she has learned</li>
-<li>Bar learned how to deploy on a cloud platform, he would have liked to know more about promises for asynchronous code..</li>
-</ul> -->
 </body>
 </html>
